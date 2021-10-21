@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
+import { ErrorComponent } from './component/error/error.component';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBLKlKbv3DxfmtGxAwAU1zU-nUjcr5dXEc',
@@ -36,6 +37,7 @@ const firebaseConfig = {
     RegisterComponent,
     ContactComponent,
     AdminComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
