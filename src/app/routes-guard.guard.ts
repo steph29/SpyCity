@@ -5,12 +5,14 @@ import {
   CanDeactivate,
   CanLoad,
   Route,
+  Router,
   UrlSegment,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from './services/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,13 +20,15 @@ import { Observable } from 'rxjs';
 export class RoutesGuardGuard
   implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad
 {
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean {
+  constructor(private authService: AuthService, private router: Router) {}
+  canActivate(): boolean {
     // Authentification and authorization here
-
-    return true;
+    if (this.authService.loggedIn()) {
+      return true;
+    } else {
+      this.router.navigate(['']);
+      return false;
+    }
   }
 
   canActivateChild(

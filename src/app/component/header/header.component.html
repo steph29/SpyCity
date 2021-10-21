@@ -13,27 +13,16 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse mx-3" id="navbarNav">
+    <div
+      class="collapse navbar-collapse mx-3"
+      id="navbarNav"
+      *ngFor="let item of dashboardMenu"
+    >
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="mission">Mission</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="login">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="register">Register</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="admin">Admin</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="logout">Logout</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="contact">Contact</a>
+          <a class="nav-link" href="/{{ item.dashboardUrl }}">{{
+            item.dashboardName
+          }}</a>
         </li>
       </ul>
     </div>

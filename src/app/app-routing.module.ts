@@ -5,6 +5,7 @@ import { ContactComponent } from './component/contact/contact.component';
 import { ErrorComponent } from './component/error/error.component';
 import { HomeComponent } from './component/home/home.component';
 import { LoginComponent } from './component/login/login.component';
+import { LogoutComponent } from './component/logout/logout.component';
 import { RegisterComponent } from './component/register/register.component';
 import { RoutesGuardGuard } from './routes-guard.guard';
 
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent,
   },
   {
     path: 'register',

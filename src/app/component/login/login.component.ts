@@ -35,13 +35,13 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
-  onSubmit() {
+
+  onSubmitLogin() {
     const email = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('password')?.value;
-
     this.authService
       .signInUser(email, password)
-      .then((data) => {
+      .then(() => {
         this.router.navigate(['/admin']);
       })
       .catch((error) => {

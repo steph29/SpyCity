@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { ErrorComponent } from './component/error/error.component';
+import { RoutesGuardGuard } from './routes-guard.guard';
+import { LogoutComponent } from './component/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { ErrorComponent } from './component/error/error.component';
     ContactComponent,
     AdminComponent,
     ErrorComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,7 @@ import { ErrorComponent } from './component/error/error.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [AuthService, AuthGuardService],
+  providers: [AuthService, AuthGuardService, RoutesGuardGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

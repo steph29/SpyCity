@@ -11,6 +11,9 @@ import { environment } from 'src/environments/environment';
 
 const app = initializeApp(environment.firebaseConfig);
 const auth = getAuth(app);
+onAuthStateChanged(auth, (user) => {
+  console.log(user);
+});
 
 export class AuthService {
   constructor() {}
@@ -75,5 +78,9 @@ export class AuthService {
           reject(error);
         });
     });
+  }
+
+  loggedIn() {
+    return !!auth.currentUser;
   }
 }

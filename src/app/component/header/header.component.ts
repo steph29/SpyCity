@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +7,36 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  isAuth: boolean = false;
+  dashboardMenu = [
+    {
+      dashboardName: 'Mission',
+      dashboardUrl: 'mission',
+    },
+    {
+      dashboardName: 'Login',
+      dashboardUrl: 'login',
+    },
+    {
+      dashboardName: 'Register',
+      dashboardUrl: 'register',
+    },
+    {
+      dashboardName: 'Admin',
+      dashboardUrl: 'admin',
+    },
+    {
+      dashboardName: 'Logout',
+      dashboardUrl: 'logout',
+    },
+    {
+      dashboardName: 'Contact',
+      dashboardUrl: 'contact',
+    },
+  ];
+
   constructor(private authService: AuthService) {}
 
+  isAuth() {}
   ngOnInit() {}
 
   onSignOut() {}
