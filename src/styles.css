@@ -1,1 +1,167 @@
 /* You can add global styles to this file, and also import other style files */
+html,
+.container-fluid,
+.container,
+.navbar,
+body {
+  background-color: #151f2d !important;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+h1,
+h2,
+input,
+.col-form-label,
+.btn,
+label {
+  font-family: "Special Elite", cursive;
+  color: #8e8c8c;
+}
+
+.nav-link {
+  color: #8e8c8c !important;
+}
+
+h3,
+h4,
+h5 {
+  font-family: "Advent Pro", sans-serif;
+  color: #8e8c8c;
+}
+
+.mainContainer {
+  margin-bottom: 70px;
+}
+
+.copyright {
+  font-size: 0.7rem;
+  color: #2b6714;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.copyright p {
+  margin: 0;
+}
+
+* {
+  text-decoration: none;
+}
+
+h2 {
+  margin-top: 0;
+  font-weight: 100;
+}
+
+button {
+  background-color: #1f2f44;
+  border-color: #1f2f44;
+}
+
+.btn {
+  border-radius: 16px;
+  width: 192px;
+}
+
+.btn-outline-danger {
+  color: #862e2a;
+}
+
+.btn-outline-success {
+  color: #2b6714;
+}
+
+.loginButton {
+  border: none !important;
+  background-color: #1f2f44 !important;
+  border-radius: 12px !important;
+}
+
+input,
+textarea,
+select {
+  margin: auto auto;
+  background-color: #1f2f44 !important;
+  border-color: #1f2f44 !important;
+  border-radius: 12px !important;
+}
+
+label::placeholder {
+  font-family: "Special Elite", cursive;
+  color: #8e8c8c;
+}
+label::placeholder::placeholder {
+  opacity: 0.5;
+}
+
+.form-control,
+textarea,
+select {
+  border-radius: 16px;
+  color: lightgray !important;
+}
+
+.form-group {
+  display: -ms-grid;
+  display: grid;
+  margin: auto auto;
+  width: 60%;
+}
+
+.col-form-label {
+  text-align: left;
+}
+
+td,
+th,
+tr {
+  color: #8e8c8c;
+  text-align: center;
+}
+
+section {
+  border: 3px solid #1f2f44;
+  border-radius: 25px;
+}
+
+.missionSection {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  overflow: hidden;
+}
+
+#mapid {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 25px;
+}
+
+img {
+  width: 20px;
+  height: 20px;
+  border: none;
+  color: white;
+}
+
+.circle {
+  height: 30px;
+  width: auto;
+}
+
+#newSelect {
+  height: 60px;
+}
+
+/*# sourceMappingURL=login.component.css.map */
+
+/*# sourceMappingURL=style.css.map */

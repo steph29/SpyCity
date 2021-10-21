@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "spyfield-b2064": {
+      "hosting": {
+        "SpyCity": [
+          "spyfield-b2064"
+        ]
+      }
+    }
+  }
+}
