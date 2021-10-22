@@ -11,11 +11,15 @@ import { environment } from 'src/environments/environment';
 
 const app = initializeApp(environment.firebaseConfig);
 const auth = getAuth(app);
-onAuthStateChanged(auth, (user) => {
-  console.log(user);
-});
 
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthService {
+  userData: any;
+  email: string = '';
+  password: string = '';
+
   constructor() {}
 
   createNewUser(email: string, password: string) {
@@ -38,9 +42,14 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       signInWithEmailAndPassword(auth, email, password)
         .then(() => {
+          // User is connected
           resolve(auth);
+          const UidAuth = auth.currentUser?.uid;
+          sessionStorage.setItem('auth', JSON.stringify(UidAuth));
+          sessionStorage.getItem('auth');
         })
         .catch((error) => {
+          // User isn't connected
           const errorCode = error.code;
           const errorMessage = error.message;
           reject(error);
@@ -55,9 +64,15 @@ export class AuthService {
           // User is signed in, see docs for a list of available properties
           // https://firebase.google.com/docs/reference/js/firebase.User
           const uid = user.uid;
+          this.userData = user;
+          sessionStorage.setItem('auth', JSON.stringify(uid));
+          sessionStorage.getItem('auth');
+
           // L'utilisateur est connecté -> accès à l'espace admin , changement de la navbar
           // ...
         } else {
+          sessionStorage.setItem('auth', 'null');
+          sessionStorage.getItem('auth');
           // User is signed out
           // deconnection -> Retour de la navbar de base, redirection vers la page login
           // ...
@@ -71,6 +86,7 @@ export class AuthService {
       signOut(auth)
         .then(() => {
           // Sign-out successful.
+          sessionStorage.removeItem('auth');
           resolve(auth);
         })
         .catch((error) => {

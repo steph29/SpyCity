@@ -20,12 +20,17 @@ import { AuthService } from './services/auth.service';
 export class RoutesGuardGuard
   implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad
 {
+  userUid: string | null = sessionStorage.getItem('auth');
+
   constructor(private authService: AuthService, private router: Router) {}
   canActivate(): boolean {
-    // Authentification and authorization here
-    if (this.authService.loggedIn()) {
+    console.log(this.userUid);
+
+    if (this.userUid !== null) {
+      console.log('Routes connectées');
       return true;
     } else {
+      console.log('Routes deconnectées');
       this.router.navigate(['']);
       return false;
     }

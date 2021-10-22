@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
     this.authService
       .createNewUser(email, password)
       .then(() => {
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/login']);
       })
       .catch((error) => {
         this.errorMessage = error;

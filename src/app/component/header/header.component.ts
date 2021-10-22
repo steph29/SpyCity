@@ -10,7 +10,7 @@ export class HeaderComponent implements OnInit {
   dashboardMenu = [
     {
       dashboardName: 'Mission',
-      dashboardUrl: 'mission',
+      dashboardUrl: '',
     },
     {
       dashboardName: 'Login',
@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   isAuth() {}
+
   ngOnInit() {}
 
   onSignOut() {}
