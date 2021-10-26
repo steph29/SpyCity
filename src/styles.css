@@ -20,13 +20,14 @@ h2,
 input,
 .col-form-label,
 .btn,
-label {
+label,
+.nav-link {
   font-family: "Special Elite", cursive;
   color: #8e8c8c;
 }
-
 .nav-link {
-  color: #8e8c8c !important;
+  align-items: flex-end;
+  display: flex;
 }
 
 h3,
@@ -166,5 +167,11 @@ img {
 
 /*# sourceMappingURL=style.css.map */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

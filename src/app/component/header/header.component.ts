@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -13,14 +12,6 @@ export class HeaderComponent implements OnInit {
       dashboardUrl: '',
     },
     {
-      dashboardName: 'Login',
-      dashboardUrl: 'login',
-    },
-    {
-      dashboardName: 'Register',
-      dashboardUrl: 'register',
-    },
-    {
       dashboardName: 'Admin',
       dashboardUrl: 'admin',
     },
@@ -29,16 +20,19 @@ export class HeaderComponent implements OnInit {
       dashboardUrl: 'logout',
     },
     {
+      dashboardName: 'Login',
+      dashboardUrl: 'login',
+    },
+    {
+      dashboardName: 'Register',
+      dashboardUrl: 'register',
+    },
+    {
       dashboardName: 'Contact',
       dashboardUrl: 'contact',
     },
   ];
-
-  constructor(private authService: AuthService) {}
-
-  isAuth() {}
+  constructor() {}
 
   ngOnInit() {}
-
-  onSignOut() {}
 }

@@ -24,8 +24,6 @@ export class RoutesGuardGuard
 
   constructor(private authService: AuthService, private router: Router) {}
   canActivate(): boolean {
-    console.log(this.userUid);
-
     if (this.userUid !== null) {
       console.log('Routes connectées');
       return true;
