@@ -12,9 +12,12 @@
             <td></td>
 
             <td>
-              <a href="/edit?id=" class="btn btn-outline-success btn-sm">
+              <button
+                (click)="onWrite()"
+                class="btn btn-outline-success btn-sm"
+              >
                 <img src="/assets/write.png" alt="" />
-              </a>
+              </button>
             </td>
             <td>
               <form action="" method="post">
@@ -303,7 +306,9 @@
           </div>
 
           <div class="form-group my-3">
-            <a href="" class="btn btn-outline-success float-end loginButton"
+            <a
+              href="addMission"
+              class="btn btn-outline-success float-end loginButton"
               >Add agent / contact/ target</a
             >
           </div>

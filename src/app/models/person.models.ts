@@ -3,7 +3,7 @@ export class Person {
   public name: string;
   public firstname: string;
   public callsign: string;
-  public birthday: Date;
+  public birthday: string;
   public nationality: number;
   public speciality: [number];
 
@@ -12,7 +12,7 @@ export class Person {
     name: string,
     firstname: string,
     callsign: string,
-    birthday: Date,
+    birthday: string,
     nationality: number,
     speciality: [number]
   ) {

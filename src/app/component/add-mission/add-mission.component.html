@@ -1,0 +1,102 @@
+<h2>Add your Person</h2>
+<form [formGroup]="addMissionForm" (ngSubmit)="addNewMission()">
+  <section class="container text-center">
+    <div class="row">
+      <div class="col">
+        <div class="col-md-12 justify-content-center align-items-center d-flex">
+          <div class="form-group my-3">
+            <select
+              name="type"
+              id="type"
+              class="form-control text-center linked-select"
+              formControlName="type"
+            >
+              <option>Select the country</option>
+              <option *ngFor="let person of typePerson">
+                {{ person.type }}
+              </option>
+            </select>
+            <div
+              class="error-block"
+              *ngIf="submitted && handleError('name', 'required')"
+            >
+              You must provide a value!
+            </div>
+          </div>
+          <div
+            class="error-block"
+            *ngIf="submitted && handleError('name', 'required')"
+          >
+            You must provide a value!
+          </div>
+          <div class="form-group my-3">
+            <label for="text" class="col-form-label">name </label>
+            <input
+              type="name"
+              class="form-control"
+              name="name"
+              formControlName="name"
+            />
+          </div>
+          <div class="form-group my-3">
+            <label for="text" class="col-form-label">firstname </label>
+            <input
+              type="firstname"
+              class="form-control"
+              name="firstname"
+              formControlName="firstname"
+            />
+          </div>
+          <div class="form-group my-3">
+            <label for="text" class="col-form-label">callsign </label>
+            <input
+              type="callsign"
+              class="form-control"
+              name="callsign"
+              formControlName="callsign"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="col-md-12 justify-content-center align-items-center d-flex">
+          <div class="form-group my-3">
+            <label for="text" class="col-form-label">birthday </label>
+            <input
+              type="birthday"
+              class="form-control"
+              name="birthday"
+              formControlName="birthday"
+            />
+          </div>
+          <div class="form-group my-3">
+            <label for="text" class="col-form-label">nationality </label>
+            <input
+              type="nationality"
+              class="form-control"
+              name="nationality"
+              formControlName="nationality"
+            />
+          </div>
+          <div class="form-group my-3">
+            <label for="text" class="col-form-label">speciality </label>
+            <input
+              type="speciality"
+              class="form-control"
+              name="speciality"
+              formControlName="speciality"
+            />
+          </div>
+          <button
+            type="submit"
+            [disabled]="addMissionForm.invalid"
+            class="btn btn-outline-success float-end loginButton"
+          >
+            Create !
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</form>

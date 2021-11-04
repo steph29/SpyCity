@@ -113,7 +113,6 @@ select {
   display: -ms-grid;
   display: grid;
   margin: auto auto;
-  width: 60%;
 }
 
 .col-form-label {
