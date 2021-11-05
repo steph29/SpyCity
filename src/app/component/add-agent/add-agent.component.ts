@@ -17,15 +17,14 @@ import { environment } from 'src/environments/environment';
 const app = initializeApp(environment.firebaseConfig);
 
 @Component({
-  selector: 'app-add-mission',
-  templateUrl: './add-mission.component.html',
-  styleUrls: ['./add-mission.component.css'],
+  selector: 'app-add-agent',
+  templateUrl: './add-agent.component.html',
+  styleUrls: ['./add-agent.component.css'],
 })
-export class AddMissionComponent implements OnInit {
+export class AddAgentComponent implements OnInit {
   submitted = false;
   private persons: Person[] = [];
   private personsUpdated = new Subject<Person[]>();
-  private document: string = '';
 
   typePerson = [
     { id: 1, type: 'agent' },
@@ -33,7 +32,7 @@ export class AddMissionComponent implements OnInit {
     { id: 3, type: 'target' },
   ];
 
-  addMissionForm = new FormGroup({
+  addPersonForm = new FormGroup({
     type: new FormControl(''),
     name: new FormControl(''),
     firstname: new FormControl(''),
@@ -52,7 +51,7 @@ export class AddMissionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const addMissionForm = this.formBuilder.group({
+    const addPersonForm = this.formBuilder.group({
       type: ['', [Validators.required]],
       name: ['', [Validators.required]],
       firstname: ['', [Validators.required]],
@@ -63,14 +62,14 @@ export class AddMissionComponent implements OnInit {
     });
   }
 
-  addNewMission() {
-    const type = this.addMissionForm.get('type')?.value;
-    const name = this.addMissionForm.get('name')?.value;
-    const firstname = this.addMissionForm.get('firstname')?.value;
-    const callsign = this.addMissionForm.get('callsign')?.value;
-    const birthday = this.addMissionForm.get('birthday')?.value;
-    const nationalityId = this.addMissionForm.get('nationalityId')?.value;
-    const specialityId = this.addMissionForm.get('specialityId')?.value;
+  addNewPerson() {
+    const type = this.addPersonForm.get('type')?.value;
+    const name = this.addPersonForm.get('name')?.value;
+    const firstname = this.addPersonForm.get('firstname')?.value;
+    const callsign = this.addPersonForm.get('callsign')?.value;
+    const birthday = this.addPersonForm.get('birthday')?.value;
+    const nationalityId = this.addPersonForm.get('nationalityId')?.value;
+    const specialityId = this.addPersonForm.get('specialityId')?.value;
 
     this.addAgent(
       type,
@@ -81,7 +80,7 @@ export class AddMissionComponent implements OnInit {
       nationalityId,
       specialityId
     );
-    this.addMissionForm.reset();
+    this.addPersonForm.reset();
     this.router.navigate(['/admin']);
   }
 
@@ -117,6 +116,6 @@ export class AddMissionComponent implements OnInit {
   }
   // Select Dropdown error handling
   public handleError = (controlName: string, errorName: string) => {
-    return this.addMissionForm.controls[controlName].hasError(errorName);
+    return this.addPersonForm.controls[controlName].hasError(errorName);
   };
 }

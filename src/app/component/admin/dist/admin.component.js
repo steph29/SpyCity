@@ -41,8 +41,6 @@ var AdminComponent = /** @class */ (function () {
         // Cette fonction doit pouvoir mettre à jour les données sur la mission
         // -> Ouvre une page vers updateMission -> recupere les nouvelles données -> Mettre à jour dans Firebase -> refermer cette fenetre -> mettre à jour
         // l'affichage
-        console.log();
-        this.crud.getMission();
     };
     AdminComponent.prototype.onTestClick = function () { };
     AdminComponent = __decorate([

@@ -1,6 +1,6 @@
 import { ContentChild, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AddMissionComponent } from './component/add-mission/add-mission.component';
+import { AddAgentComponent } from './component/add-agent/add-agent.component';
 import { AdminComponent } from './component/admin/admin.component';
 import { ContactComponent } from './component/contact/contact.component';
 import { ErrorComponent } from './component/error/error.component';
@@ -28,8 +28,8 @@ const routes: Routes = [
     component: ContactComponent,
   },
   {
-    path: 'addMission',
-    component: AddMissionComponent,
+    path: 'addAgent',
+    component: AddAgentComponent,
   },
   {
     path: 'admin',

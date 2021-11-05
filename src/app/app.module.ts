@@ -16,7 +16,7 @@ import { AuthService } from './services/auth.service';
 import { ErrorComponent } from './component/error/error.component';
 import { RoutesGuardGuard } from './routes-guard.guard';
 import { LogoutComponent } from './component/logout/logout.component';
-import { AddMissionComponent } from './component/add-mission/add-mission.component';
+import { AddAgentComponent } from './component/add-agent/add-agent.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { AddMissionComponent } from './component/add-mission/add-mission.compone
     AdminComponent,
     ErrorComponent,
     LogoutComponent,
-    AddMissionComponent,
+    AddAgentComponent,
   ],
   imports: [
     BrowserModule,

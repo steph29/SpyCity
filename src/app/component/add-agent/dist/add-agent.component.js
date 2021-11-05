@@ -13,15 +13,15 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
     return r;
 };
 exports.__esModule = true;
-exports.AddMissionComponent = void 0;
+exports.AddAgentComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var rxjs_1 = require("rxjs");
 var app_1 = require("firebase/app");
 var environment_1 = require("src/environments/environment");
 var app = app_1.initializeApp(environment_1.environment.firebaseConfig);
-var AddMissionComponent = /** @class */ (function () {
-    function AddMissionComponent(formBuilder, crud, router, auth, httpClient) {
+var AddAgentComponent = /** @class */ (function () {
+    function AddAgentComponent(formBuilder, crud, router, auth, httpClient) {
         var _this = this;
         this.formBuilder = formBuilder;
         this.crud = crud;
@@ -31,13 +31,12 @@ var AddMissionComponent = /** @class */ (function () {
         this.submitted = false;
         this.persons = [];
         this.personsUpdated = new rxjs_1.Subject();
-        this.document = '';
         this.typePerson = [
             { id: 1, type: 'agent' },
             { id: 2, type: 'contact' },
             { id: 3, type: 'target' },
         ];
-        this.addMissionForm = new forms_1.FormGroup({
+        this.addPersonForm = new forms_1.FormGroup({
             type: new forms_1.FormControl(''),
             name: new forms_1.FormControl(''),
             firstname: new forms_1.FormControl(''),
@@ -48,11 +47,11 @@ var AddMissionComponent = /** @class */ (function () {
         });
         // Select Dropdown error handling
         this.handleError = function (controlName, errorName) {
-            return _this.addMissionForm.controls[controlName].hasError(errorName);
+            return _this.addPersonForm.controls[controlName].hasError(errorName);
         };
     }
-    AddMissionComponent.prototype.ngOnInit = function () {
-        var addMissionForm = this.formBuilder.group({
+    AddAgentComponent.prototype.ngOnInit = function () {
+        var addPersonForm = this.formBuilder.group({
             type: ['', [forms_1.Validators.required]],
             name: ['', [forms_1.Validators.required]],
             firstname: ['', [forms_1.Validators.required]],
@@ -62,21 +61,21 @@ var AddMissionComponent = /** @class */ (function () {
             specialityId: ['', [forms_1.Validators.required]]
         });
     };
-    AddMissionComponent.prototype.addNewMission = function () {
+    AddAgentComponent.prototype.addNewPerson = function () {
         var _a, _b, _c, _d, _e, _f, _g;
-        var type = (_a = this.addMissionForm.get('type')) === null || _a === void 0 ? void 0 : _a.value;
-        var name = (_b = this.addMissionForm.get('name')) === null || _b === void 0 ? void 0 : _b.value;
-        var firstname = (_c = this.addMissionForm.get('firstname')) === null || _c === void 0 ? void 0 : _c.value;
-        var callsign = (_d = this.addMissionForm.get('callsign')) === null || _d === void 0 ? void 0 : _d.value;
-        var birthday = (_e = this.addMissionForm.get('birthday')) === null || _e === void 0 ? void 0 : _e.value;
-        var nationalityId = (_f = this.addMissionForm.get('nationalityId')) === null || _f === void 0 ? void 0 : _f.value;
-        var specialityId = (_g = this.addMissionForm.get('specialityId')) === null || _g === void 0 ? void 0 : _g.value;
+        var type = (_a = this.addPersonForm.get('type')) === null || _a === void 0 ? void 0 : _a.value;
+        var name = (_b = this.addPersonForm.get('name')) === null || _b === void 0 ? void 0 : _b.value;
+        var firstname = (_c = this.addPersonForm.get('firstname')) === null || _c === void 0 ? void 0 : _c.value;
+        var callsign = (_d = this.addPersonForm.get('callsign')) === null || _d === void 0 ? void 0 : _d.value;
+        var birthday = (_e = this.addPersonForm.get('birthday')) === null || _e === void 0 ? void 0 : _e.value;
+        var nationalityId = (_f = this.addPersonForm.get('nationalityId')) === null || _f === void 0 ? void 0 : _f.value;
+        var specialityId = (_g = this.addPersonForm.get('specialityId')) === null || _g === void 0 ? void 0 : _g.value;
         this.addAgent(type, name, firstname, callsign, birthday, nationalityId, specialityId);
-        this.addMissionForm.reset();
+        this.addPersonForm.reset();
         this.router.navigate(['/admin']);
     };
     // HttpClient API post() => create Agent
-    AddMissionComponent.prototype.addAgent = function (type, name, firstname, callsign, birthday, nationalityId, specialityId) {
+    AddAgentComponent.prototype.addAgent = function (type, name, firstname, callsign, birthday, nationalityId, specialityId) {
         var _this = this;
         var person = {
             type: type,
@@ -94,13 +93,13 @@ var AddMissionComponent = /** @class */ (function () {
             _this.personsUpdated.next(__spreadArrays(_this.persons));
         });
     };
-    AddMissionComponent = __decorate([
+    AddAgentComponent = __decorate([
         core_1.Component({
-            selector: 'app-add-mission',
-            templateUrl: './add-mission.component.html',
-            styleUrls: ['./add-mission.component.css']
+            selector: 'app-add-agent',
+            templateUrl: './add-agent.component.html',
+            styleUrls: ['./add-agent.component.css']
         })
-    ], AddMissionComponent);
-    return AddMissionComponent;
+    ], AddAgentComponent);
+    return AddAgentComponent;
 }());
-exports.AddMissionComponent = AddMissionComponent;
+exports.AddAgentComponent = AddAgentComponent;
