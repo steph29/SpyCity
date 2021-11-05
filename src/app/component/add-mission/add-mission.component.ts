@@ -7,6 +7,14 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CrudService } from 'src/app/shared/crud.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Person } from '../../models/person';
+import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { initializeApp } from 'firebase/app';
+import { environment } from 'src/environments/environment';
+
+const app = initializeApp(environment.firebaseConfig);
 
 @Component({
   selector: 'app-add-mission',
@@ -15,10 +23,14 @@ import { CrudService } from 'src/app/shared/crud.service';
 })
 export class AddMissionComponent implements OnInit {
   submitted = false;
+  private persons: Person[] = [];
+  private personsUpdated = new Subject<Person[]>();
+  private document: string = '';
+
   typePerson = [
-    { id: 1, type: 'Agent' },
-    { id: 2, type: 'Contact' },
-    { id: 3, type: 'Target' },
+    { id: 1, type: 'agent' },
+    { id: 2, type: 'contact' },
+    { id: 3, type: 'target' },
   ];
 
   addMissionForm = new FormGroup({
@@ -27,52 +39,84 @@ export class AddMissionComponent implements OnInit {
     firstname: new FormControl(''),
     callsign: new FormControl(''),
     birthday: new FormControl(''),
-    nationality: new FormControl(''),
-    speciality: new FormControl(''),
+    nationalityId: new FormControl(''),
+    specialityId: new FormControl(''),
   });
 
   constructor(
     private formBuilder: FormBuilder,
     private crud: CrudService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService,
+    private httpClient: HttpClient
   ) {}
 
   ngOnInit() {
-    const loginForm = this.formBuilder.group({
+    const addMissionForm = this.formBuilder.group({
       type: ['', [Validators.required]],
       name: ['', [Validators.required]],
       firstname: ['', [Validators.required]],
       callsign: ['', [Validators.required]],
       birthday: ['', [Validators.required]],
-      nationality: ['', [Validators.required]],
-      speciality: ['', [Validators.required]],
+      nationalityId: ['', [Validators.required]],
+      specialityId: ['', [Validators.required]],
     });
   }
-  // Select Dropdown error handling
-  public handleError = (controlName: string, errorName: string) => {
-    return this.addMissionForm.controls[controlName].hasError(errorName);
-  };
 
   addNewMission() {
-    this.submitted = true;
     const type = this.addMissionForm.get('type')?.value;
     const name = this.addMissionForm.get('name')?.value;
     const firstname = this.addMissionForm.get('firstname')?.value;
     const callsign = this.addMissionForm.get('callsign')?.value;
     const birthday = this.addMissionForm.get('birthday')?.value;
-    const nationality = this.addMissionForm.get('nationality')?.value;
-    const speciality = this.addMissionForm.get('speciality')?.value;
+    const nationalityId = this.addMissionForm.get('nationalityId')?.value;
+    const specialityId = this.addMissionForm.get('specialityId')?.value;
 
-    this.crud.addAgent(
+    this.addAgent(
       type,
       name,
       firstname,
       callsign,
       birthday,
-      nationality,
-      speciality
+      nationalityId,
+      specialityId
     );
     this.addMissionForm.reset();
     this.router.navigate(['/admin']);
   }
+
+  // HttpClient API post() => create Agent
+  addAgent(
+    type: string,
+    name: string,
+    firstname: string,
+    callsign: string,
+    birthday: string,
+    nationalityId: number,
+    specialityId: [number]
+  ) {
+    const person: Person = {
+      type: type,
+      name: name,
+      firstname: firstname,
+      callsign: callsign,
+      birthday: birthday,
+      nationalityId: nationalityId,
+      specialityId: specialityId,
+    };
+
+    this.httpClient
+      .post<{ message: string }>(
+        app.options.databaseURL + '/' + type + '.json',
+        person
+      )
+      .subscribe(() => {
+        this.persons.push(person);
+        this.personsUpdated.next([...this.persons]);
+      });
+  }
+  // Select Dropdown error handling
+  public handleError = (controlName: string, errorName: string) => {
+    return this.addMissionForm.controls[controlName].hasError(errorName);
+  };
 }

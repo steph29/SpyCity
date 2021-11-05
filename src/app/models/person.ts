@@ -4,8 +4,8 @@ export class Person {
   public firstname: string;
   public callsign: string;
   public birthday: string;
-  public nationality: number;
-  public speciality: [number];
+  public nationalityId: number;
+  public specialityId: [number];
 
   constructor(
     type: string,
@@ -13,15 +13,15 @@ export class Person {
     firstname: string,
     callsign: string,
     birthday: string,
-    nationality: number,
-    speciality: [number]
+    nationalityId: number,
+    specialityId: [number]
   ) {
     this.type = type;
     this.name = name;
     this.firstname = firstname;
     this.callsign = callsign;
     this.birthday = birthday;
-    this.nationality = nationality;
-    this.speciality = speciality;
+    this.nationalityId = nationalityId;
+    this.specialityId = specialityId;
   }
 }

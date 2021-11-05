@@ -1,4 +1,4 @@
-import { Person } from './person.models';
+import { Person } from './person';
 
 export class Mission {
   public id: string;

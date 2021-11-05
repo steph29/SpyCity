@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { User } from '../models/user';
-import { retry } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
-import { Person } from '../models/person.models';
+import { Person } from '../models/person';
 
 const app = initializeApp(environment.firebaseConfig);
 
@@ -13,30 +11,23 @@ const app = initializeApp(environment.firebaseConfig);
   providedIn: 'root',
 })
 export class CrudService {
-  user: User[] = [];
+  private persons: Person[] = [];
+  private personsUpdated = new Subject<Person[]>();
+
   error: string = '';
 
   constructor(private httpClient: HttpClient) {}
 
   // Create
   // HttpClient API post() => create Agent
-  createAgent(): Observable<User> {
-    return this.httpClient
-      .post<User>(
-        app.options.databaseURL + '/agent.json',
-        JSON.stringify(this.user)
-      )
-      .pipe(retry(1));
-  }
-
   addAgent(
     type: string,
     name: string,
     firstname: string,
     callsign: string,
     birthday: string,
-    nationality: number,
-    speciality: [number]
+    nationalityId: number,
+    specialityId: [number]
   ) {
     const person: Person = {
       type: type,
@@ -44,9 +35,10 @@ export class CrudService {
       firstname: firstname,
       callsign: callsign,
       birthday: birthday,
-      nationality: nationality,
-      speciality: speciality,
+      nationalityId: nationalityId,
+      specialityId: specialityId,
     };
+
     this.httpClient
       .post<{ message: string }>(
         app.options.databaseURL + '/agent.json',
@@ -54,10 +46,16 @@ export class CrudService {
       )
       .subscribe((responseDate) => {
         console.log(responseDate.message);
+        this.persons.push(person);
+        this.personsUpdated.next([...this.persons]);
       });
   }
-
   // Read
+  getMission() {
+    this.httpClient
+      .get(app.options.databaseURL + '/agent.json')
+      .subscribe((data) => {});
+  }
 
   // Update
 

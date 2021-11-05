@@ -8,28 +8,28 @@
           <th class="col-auto">Delete</th>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
+          <tr *ngFor="let item of missions">
+            <td id="{{ item.id }}">{{ item.mission }}</td>
 
             <td>
-              <button
+              <a
+                href="/updateMission?id="
                 (click)="onWrite()"
                 class="btn btn-outline-success btn-sm"
               >
                 <img src="/assets/write.png" alt="" />
-              </button>
+              </a>
             </td>
             <td>
-              <form action="" method="post">
-                <button
-                  type="submit"
-                  name="delete"
-                  value=""
-                  class="btn btn-outline-danger btn-sm my-0"
-                >
-                  <img src="/assets/bin.png" alt="" />
-                </button>
-              </form>
+              <a
+                href="/delete?id="
+                type="submit"
+                name="delete"
+                value=""
+                class="btn btn-outline-danger btn-sm my-0"
+              >
+                <img src="/assets/bin.png" alt="" />
+              </a>
             </td>
           </tr>
           <tr>
@@ -49,10 +49,10 @@
           <th class="col-auto">Delete</th>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
+          <tr *ngFor="let item of agents">
+            <td id="{{ item.id }}">{{ item.agent }}</td>
 
-            <!-- faire un bouton update -->
+            <td></td>
             <td>
               <a
                 href="/updateAgent?id="
@@ -63,16 +63,15 @@
               </a>
             </td>
             <td>
-              <form action="" method="post">
-                <input type="hidden" value="" name="id_delete_agent" />
-                <button
-                  type="submit"
-                  name="delete_contact"
-                  class="btn btn-outline-danger btn-sm my-0"
-                >
-                  <img src="/assets/bin.png" alt="" />
-                </button>
-              </form>
+              <input type="hidden" value="" name="id_delete_agent" />
+              <a
+                href="/delete?id="
+                type="submit"
+                name="delete_contact"
+                class="btn btn-outline-danger btn-sm my-0"
+              >
+                <img src="/assets/bin.png" alt="" />
+              </a>
             </td>
           </tr>
 
