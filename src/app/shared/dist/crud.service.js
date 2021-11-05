@@ -40,9 +40,8 @@ var CrudService = /** @class */ (function () {
             specialityId: specialityId
         };
         this.httpClient
-            .post(app.options.databaseURL + '/agent.json', person)
-            .subscribe(function (responseDate) {
-            console.log(responseDate.message);
+            .post(app.options.databaseURL + '/' + type + '.json', person)
+            .subscribe(function () {
             _this.persons.push(person);
             _this.personsUpdated.next(__spreadArrays(_this.persons));
         });

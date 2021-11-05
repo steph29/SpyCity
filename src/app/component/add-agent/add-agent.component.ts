@@ -71,7 +71,7 @@ export class AddAgentComponent implements OnInit {
     const nationalityId = this.addPersonForm.get('nationalityId')?.value;
     const specialityId = this.addPersonForm.get('specialityId')?.value;
 
-    this.addAgent(
+    this.crud.addAgent(
       type,
       name,
       firstname,
@@ -84,36 +84,6 @@ export class AddAgentComponent implements OnInit {
     this.router.navigate(['/admin']);
   }
 
-  // HttpClient API post() => create Agent
-  addAgent(
-    type: string,
-    name: string,
-    firstname: string,
-    callsign: string,
-    birthday: string,
-    nationalityId: number,
-    specialityId: [number]
-  ) {
-    const person: Person = {
-      type: type,
-      name: name,
-      firstname: firstname,
-      callsign: callsign,
-      birthday: birthday,
-      nationalityId: nationalityId,
-      specialityId: specialityId,
-    };
-
-    this.httpClient
-      .post<{ message: string }>(
-        app.options.databaseURL + '/' + type + '.json',
-        person
-      )
-      .subscribe(() => {
-        this.persons.push(person);
-        this.personsUpdated.next([...this.persons]);
-      });
-  }
   // Select Dropdown error handling
   public handleError = (controlName: string, errorName: string) => {
     return this.addPersonForm.controls[controlName].hasError(errorName);

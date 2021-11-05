@@ -41,15 +41,15 @@ export class CrudService {
 
     this.httpClient
       .post<{ message: string }>(
-        app.options.databaseURL + '/agent.json',
+        app.options.databaseURL + '/' + type + '.json',
         person
       )
-      .subscribe((responseDate) => {
-        console.log(responseDate.message);
+      .subscribe(() => {
         this.persons.push(person);
         this.personsUpdated.next([...this.persons]);
       });
   }
+
   // Read
   getMission() {
     this.httpClient
