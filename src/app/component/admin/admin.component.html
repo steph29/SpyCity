@@ -13,7 +13,7 @@
 
             <td>
               <a
-                href="/updateMission?id="
+                href="/updateMission?id={{ item.id }}"
                 (click)="onWrite()"
                 class="btn btn-outline-success btn-sm"
               >
@@ -22,7 +22,7 @@
             </td>
             <td>
               <a
-                href="/delete?id="
+                href="/delete?id={{ item.id }}"
                 type="submit"
                 name="delete"
                 value=""
@@ -52,10 +52,9 @@
           <tr *ngFor="let item of agents">
             <td id="{{ item.id }}">{{ item.agent }}</td>
 
-            <td></td>
             <td>
               <a
-                href="/updateAgent?id="
+                href="/updateAgent?id={{ item.id }}"
                 class="btn btn-outline-success btn-sm"
                 name="update_agent"
               >
@@ -65,7 +64,7 @@
             <td>
               <input type="hidden" value="" name="id_delete_agent" />
               <a
-                href="/delete?id="
+                href="/delete?id={{ item.id }}"
                 type="submit"
                 name="delete_contact"
                 class="btn btn-outline-danger btn-sm my-0"

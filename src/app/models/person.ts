@@ -1,4 +1,5 @@
 export class Person {
+  public id: string | null;
   public type: string;
   public name: string;
   public firstname: string;
@@ -8,6 +9,7 @@ export class Person {
   public specialityId: [number];
 
   constructor(
+    id: string | null,
     type: string,
     name: string,
     firstname: string,
@@ -16,6 +18,7 @@ export class Person {
     nationalityId: number,
     specialityId: [number]
   ) {
+    this.id = id;
     this.type = type;
     this.name = name;
     this.firstname = firstname;

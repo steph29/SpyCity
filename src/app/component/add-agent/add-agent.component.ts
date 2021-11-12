@@ -63,6 +63,7 @@ export class AddAgentComponent implements OnInit {
   }
 
   addNewPerson() {
+    const id = null;
     const type = this.addPersonForm.get('type')?.value;
     const name = this.addPersonForm.get('name')?.value;
     const firstname = this.addPersonForm.get('firstname')?.value;
@@ -72,6 +73,7 @@ export class AddAgentComponent implements OnInit {
     const specialityId = this.addPersonForm.get('specialityId')?.value;
 
     this.crud.addAgent(
+      id,
       type,
       name,
       firstname,

@@ -1,7 +1,7 @@
 {
-  "/api/*": {
-    "target": "https://spyfield-b2064-default-rtdb.europe-west1.firebasedatabase.app/agent.json",
-    "secure": false,
+  "/api": {
+    "target": "https://spyfield-b2064-default-rtdb.europe-west1.firebasedatabase.app",
+    "secure": true,
     "logLevel": "debug"
   }
 }

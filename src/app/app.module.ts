@@ -17,6 +17,7 @@ import { ErrorComponent } from './component/error/error.component';
 import { RoutesGuardGuard } from './routes-guard.guard';
 import { LogoutComponent } from './component/logout/logout.component';
 import { AddAgentComponent } from './component/add-agent/add-agent.component';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
