@@ -50,11 +50,12 @@ export class CrudService {
       });
   }
 
+  getAgent() {
+    return this.httpClient.get<Person>(app.options.databaseURL + '/agent.json');
+  }
   // Read
   getMission() {
-    this.httpClient
-      .get(app.options.databaseURL + '/agent.json')
-      .subscribe((data) => {});
+    return this.httpClient.get(app.options.databaseURL + '/missions.json');
   }
 
   // Update

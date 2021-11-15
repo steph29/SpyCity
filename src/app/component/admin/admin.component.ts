@@ -22,28 +22,33 @@ export class AdminComponent implements OnInit {
     speciality: 5,
   };
 
-  missions = [
-    { id: 1, mission: 'mission1' },
-    { id: 2, mission: 'mission2' },
-    { id: 3, mission: 'mission3' },
-  ];
-  agents = [
-    { id: 1, agent: 'agent1' },
-    { id: 2, agent: 'agent2' },
-    { id: 3, agent: 'agent3' },
-  ];
+  missions = [];
+  agents = [];
   constructor(private httpClient: HttpClient, public crud: CrudService) {}
 
-  ngOnInit() {}
-
-  // Sert à lire un agent pour le test
-  onWrite() {
-    // Cette fonction doit pouvoir mettre à jour les données sur la mission
-    // -> Ouvre une page vers updateMission -> recupere les nouvelles données -> Mettre à jour dans Firebase -> refermer cette fenetre -> mettre à jour
-    // l'affichage
+  ngOnInit() {
+    this.crud.getAgent().subscribe((data) => {
+      this.initAgent(data);
+    });
+    this.crud.getMission().subscribe((data) => {
+      this.initMission(data);
+    });
   }
 
-  onTestClick() {}
-
-  // Sert à inserer une mission
+  initAgent(data: any) {
+    const dataDisplay: any = [];
+    Object.keys(data).map(function (e) {
+      const agents = { id: e, agent: data[e]['callsign'] };
+      dataDisplay.push(agents);
+    });
+    this.agents = dataDisplay;
+  }
+  initMission(data: any) {
+    const dataDisplay: any = [];
+    Object.keys(data).map(function (e) {
+      const missions = { id: e, mission: data[e]['codeName'] };
+      dataDisplay.push(missions);
+    });
+    this.missions = dataDisplay;
+  }
 }
