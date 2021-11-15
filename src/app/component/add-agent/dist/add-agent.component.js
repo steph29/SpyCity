@@ -56,6 +56,7 @@ var AddAgentComponent = /** @class */ (function () {
     };
     AddAgentComponent.prototype.addNewPerson = function () {
         var _a, _b, _c, _d, _e, _f, _g;
+        var id = null;
         var type = (_a = this.addPersonForm.get('type')) === null || _a === void 0 ? void 0 : _a.value;
         var name = (_b = this.addPersonForm.get('name')) === null || _b === void 0 ? void 0 : _b.value;
         var firstname = (_c = this.addPersonForm.get('firstname')) === null || _c === void 0 ? void 0 : _c.value;
@@ -63,7 +64,7 @@ var AddAgentComponent = /** @class */ (function () {
         var birthday = (_e = this.addPersonForm.get('birthday')) === null || _e === void 0 ? void 0 : _e.value;
         var nationalityId = (_f = this.addPersonForm.get('nationalityId')) === null || _f === void 0 ? void 0 : _f.value;
         var specialityId = (_g = this.addPersonForm.get('specialityId')) === null || _g === void 0 ? void 0 : _g.value;
-        this.crud.addAgent(type, name, firstname, callsign, birthday, nationalityId, specialityId);
+        this.crud.addAgent(id, type, name, firstname, callsign, birthday, nationalityId, specialityId);
         this.addPersonForm.reset();
         this.router.navigate(['/admin']);
     };
