@@ -14,12 +14,21 @@ export class CrudService {
   private persons: Person[] = [];
   private personsUpdated = new Subject<Person[]>();
 
-  error: string = '';
+  apiurl =
+    'https://spyfield-b2064-default-rtdb.europe-west1.firebasedatabase.app';
+  httpOptions = {
+    header: new Headers({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers':
+        'Origin, X-Requested-With, Content-Type, Accept',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT,DELETE, OPTIONS',
+    }),
+  };
 
   constructor(private httpClient: HttpClient) {}
 
-  // Create
-  // HttpClient API post() => create Agent
+  // **************** AGENT *******************
+  // CREATE
   addAgent(
     type: string,
     name: string,
@@ -39,10 +48,11 @@ export class CrudService {
       specialityId: specialityId,
     };
 
-    this.httpClient
+    return this.httpClient
       .post<{ message: string }>(
-        app.options.databaseURL + '/' + type + '.json',
-        person
+        this.apiurl + '/' + type + '.json',
+        person,
+        this.httpOptions
       )
       .subscribe(() => {
         this.persons.push(person);
@@ -50,12 +60,23 @@ export class CrudService {
       });
   }
 
+  // READ
   getAgent() {
-    return this.httpClient.get<Person>(app.options.databaseURL + '/agent.json');
+    return this.httpClient.get<Person>(this.apiurl + '/agent.json');
   }
+
+  // UPDATE
+
+  // DELETE
+
+  deleteAgent() {
+    return this.httpClient.delete<Person>(this.apiurl + '/agent.json/');
+  }
+
+  // **************** Missions *******************
   // Read
   getMission() {
-    return this.httpClient.get(app.options.databaseURL + '/missions.json');
+    return this.httpClient.get(this.apiurl + '/missions.json');
   }
 
   // Update
