@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AddAgentComponent } from './component/add-agent/add-agent.component';
 import { AdminComponent } from './component/admin/admin.component';
 import { ContactComponent } from './component/contact/contact.component';
+import { DeleteComponent } from './component/delete/delete.component';
 import { ErrorComponent } from './component/error/error.component';
 import { HomeComponent } from './component/home/home.component';
 import { LoginComponent } from './component/login/login.component';
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'addAgent',
     component: AddAgentComponent,
+  },
+  {
+    path: 'delete/:id',
+    component: DeleteComponent,
   },
   {
     path: 'admin',

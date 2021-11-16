@@ -14,7 +14,6 @@
             <td>
               <a
                 href="/updateMission?id="
-                (click)="onWrite()"
                 class="btn btn-outline-success btn-sm"
               >
                 <img src="/assets/write.png" alt="" />
@@ -22,7 +21,7 @@
             </td>
             <td>
               <a
-                href="/delete?id="
+                [routerLink]="['/delete', item.id]"
                 type="submit"
                 name="delete"
                 value=""
@@ -55,7 +54,7 @@
             <td></td>
             <td>
               <a
-                href="/updateAgent?id="
+                href="/updateAgent?id={{ item.id }}"
                 class="btn btn-outline-success btn-sm"
                 name="update_agent"
               >
@@ -65,7 +64,7 @@
             <td>
               <input type="hidden" value="" name="id_delete_agent" />
               <a
-                href="/delete?id="
+                [routerLink]="['/delete', item.id]"
                 type="submit"
                 name="delete_contact"
                 class="btn btn-outline-danger btn-sm my-0"
