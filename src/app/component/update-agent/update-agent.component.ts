@@ -1,19 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CrudService } from 'src/app/shared/crud.service';
-import { AuthService } from 'src/app/services/auth.service';
 import { Person } from '../../models/person';
-import { Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
-import { parseI18nMeta } from '@angular/compiler/src/render3/view/i18n/meta';
 
 const app = initializeApp(environment.firebaseConfig);
 
@@ -45,7 +36,6 @@ export class UpdateAgentComponent implements OnInit {
   });
 
   constructor(
-    private formBuilder: FormBuilder,
     private crud: CrudService,
     private router: Router,
     private activatedRoute: ActivatedRoute
