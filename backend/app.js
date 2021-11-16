@@ -16,7 +16,7 @@ mongoose
     console.log("Connected to mongo DB");
   })
   .catch(() => {
-    console.log("Connectio failed");
+    console.log("Connection failed");
   });
 
 app.use(cors());

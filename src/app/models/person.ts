@@ -1,27 +1,27 @@
 export class Person {
   public type: string;
-  public name: string;
-  public firstname: string;
+  public lname: string;
+  public fname: string;
   public callsign: string;
   public birthday: string;
   public nationalityId: number;
-  public specialityId: [number];
+  public specialities: [number];
 
   constructor(
     type: string,
-    name: string,
-    firstname: string,
+    lname: string,
+    fname: string,
     callsign: string,
     birthday: string,
     nationalityId: number,
-    specialityId: [number]
+    specialities: [number]
   ) {
     this.type = type;
-    this.name = name;
-    this.firstname = firstname;
+    this.lname = lname;
+    this.fname = fname;
     this.callsign = callsign;
     this.birthday = birthday;
     this.nationalityId = nationalityId;
-    this.specialityId = specialityId;
+    this.specialities = specialities;
   }
 }
