@@ -65,7 +65,7 @@ export class UpdateAgentComponent implements OnInit {
         callsign: data[e]['callsign'],
         birthday: data[e]['birthday'],
         nationalityId: data[e]['nationalityId'],
-        specialities: data[e]['specialities'],
+        specialities: [data[e]['specialities']],
       };
       dataDisplay.push(agents);
     });
