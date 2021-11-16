@@ -103,21 +103,16 @@
           </div>
           <div class="form-group my-3">
             <label class="col-form-label">Country</label>
-            <!-- <select
-              name="country"
-              id="country"
+            <select
+              formControlName="country"
               class="form-control text-center linked-select"
             >
               <option>Select the country</option>
 
-              <option name="" value=""></option>
-            </select> -->
-            <input
-              type="text"
-              class="form-control"
-              name="country"
-              formControlName="country"
-            />
+              <option *ngFor="let item of countriesList">
+                {{ item.item }}
+              </option>
+            </select>
           </div>
           <div class="form-group my-3">
             <label class="col-form-label">Code Name</label>
@@ -130,21 +125,16 @@
           </div>
           <div class="form-group my-3">
             <label class="col-form-label">Target </label>
-            <!-- <select
-              name="target[]"
-              id="target"
+            <select
+              formControlName="target"
               class="form-control text-center linked-select"
             >
               <option>Select your Target</option>
 
-              <option name="" value=""></option>
-            </select> -->
-            <input
-              type="text"
-              class="form-control"
-              name="target"
-              formControlName="target"
-            />
+              <option *ngFor="let item of targetList">
+                {{ item.item }}
+              </option>
+            </select>
             <div class="newSelectTarget"></div>
             <div>
               <a
@@ -163,21 +153,16 @@
           </div>
           <div class="form-group my-3">
             <label class="col-form-label">Specialities </label>
-            <!-- <select
-              name="specialities"
+            <select
+              formControlName="specialities"
               class="form-control text-center linked-select"
-              id="specialities"
             >
               <option>Select your Specialities</option>
 
-              <option name="" value=""></option>
-            </select> -->
-            <input
-              type="text"
-              class="form-control"
-              name="specialities"
-              formControlName="specialities"
-            />
+              <option *ngFor="let item of specialitiesList">
+                {{ item.item }}
+              </option>
+            </select>
           </div>
           <div class="form-group my-3">
             <div
@@ -191,19 +176,16 @@
               id="alertAgent"
             ></div>
             <label class="col-form-label">Agent </label>
-            <!-- <select
-              name="agent[]"
-              id="agent"
+            <select
+              formControlName="agent"
               class="form-control text-center linked-select"
             >
               <option>Select your Agent</option>
-            </select> -->
-            <input
-              type="text"
-              class="form-control"
-              name="agent"
-              formControlName="agent"
-            />
+              <option *ngFor="let item of agentList">
+                {{ item.item }}
+              </option>
+            </select>
+
             <div class="newSelectAgent"></div>
             <div>
               <a
@@ -247,21 +229,16 @@
               id="alertContact"
             ></div>
             <label class="col-form-label">Contact</label>
-            <!-- <select
-              name="contact[]"
-              id="contact"
+            <select
+              formControlName="contact"
               class="form-control text-center linked-select"
             >
               <option>Select your contact</option>
 
-              <option name="" value=""></option>
-            </select> -->
-            <input
-              type="text"
-              class="form-control"
-              name="contact"
-              formControlName="contact"
-            />
+              <option *ngFor="let item of contactList">
+                {{ item.item }}
+              </option>
+            </select>
             <div class="newSelectContact"></div>
             <div>
               <a
@@ -281,54 +258,35 @@
 
           <div class="form-group my-3">
             <label class="col-form-label">Type of mission </label>
-            <!-- <select
-              name="type"
+            <select
+              formControlName="type"
               class="form-control text-center linked-select"
-              id="type"
             >
               <option>Select your Type of mission</option>
 
-              <option name="" value=""></option>
-            </select> -->
-            <input
-              type="text"
-              class="form-control"
-              name="type"
-              formControlName="type"
-            />
+              <option *ngFor="let item of typeList">{{ item.item }}</option>
+            </select>
           </div>
           <div class="form-group my-3">
             <label class="col-form-label">Status </label>
-            <!-- <select
-              name="status"
+            <select
+              formControlName="status"
               class="form-control text-center linked-select"
             >
               <option>Select the status</option>
 
-              <option name=""></option>
-            </select> -->
-            <input
-              type="text"
-              class="form-control"
-              name="status"
-              formControlName="status"
-            />
+              <option *ngFor="let item of statusList">{{ item.item }}</option>
+            </select>
           </div>
           <div class="form-group my-3">
             <label class="col-form-label">Hideouts </label>
-            <!-- <select
-              name="hideouts[]"
+            <select
+              formControlName="hideouts"
               class="form-control text-center linked-select"
-              id="hideouts"
             >
               <option>Select your hideouts</option>
-            </select> -->
-            <input
-              type="text"
-              class="form-control"
-              name="hideouts"
-              formControlName="hideouts"
-            />
+              <option *ngFor="let item of hideoutsList">{{ item.item }}</option>
+            </select>
             <div class="newSelectHideouts"></div>
             <div>
               <a

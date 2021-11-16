@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { CrudService } from 'src/app/shared/crud.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
-import { Validators } from '@angular/forms';
-import { stat } from 'fs';
 
 const app = initializeApp(environment.firebaseConfig);
+
+// Declaration d'un interface List
+export interface List {
+  id: string;
+  item: string;
+}
 
 @Component({
   selector: 'app-admin',
@@ -18,12 +21,17 @@ const app = initializeApp(environment.firebaseConfig);
 export class AdminComponent implements OnInit {
   missions = [{ id: 1, mission: 'test' }];
   agents = [{ id: 1, agent: 'testAgent' }];
-  constructor(
-    private httpClient: HttpClient,
-    public crud: CrudService,
-    private router: Router,
-    private formBuilder: FormBuilder
-  ) {}
+
+  countriesList: List[] = [];
+  targetList: List[] = [];
+  agentList: List[] = [];
+  specialitiesList: List[] = [];
+  contactList: List[] = [];
+  statusList: List[] = [];
+  hideoutsList: List[] = [];
+  typeList: List[] = [];
+
+  constructor(public crud: CrudService, private router: Router) {}
 
   addMissionForm = new FormGroup({
     agent: new FormControl(''),
@@ -48,22 +56,14 @@ export class AdminComponent implements OnInit {
     this.crud.getMission().subscribe((data) => {
       this.initMission(data);
     });
-
-    const addMissionForm = this.formBuilder.group({
-      agent: ['', [Validators.required]],
-      codeName: ['', [Validators.required]],
-      contact: ['', [Validators.required]],
-      country: ['', [Validators.required]],
-      desc: ['', [Validators.required]],
-      endDate: ['', [Validators.required]],
-      hideouts: ['', [Validators.required]],
-      mission: ['', [Validators.required]],
-      specialities: ['', [Validators.required]],
-      startDate: ['', [Validators.required]],
-      status: ['', [Validators.required]],
-      target: ['', [Validators.required]],
-      type: ['', [Validators.required]],
-    });
+    this.getData('target', 'callsign', this.targetList);
+    this.getData('countries', 'name', this.countriesList);
+    this.getData('contact', 'callsign', this.contactList);
+    this.getData('specialities', 'name', this.specialitiesList);
+    this.getData('status', 'state', this.statusList);
+    this.getData('agent', 'callsign', this.agentList);
+    this.getData('countries', 'capital', this.hideoutsList);
+    this.getData('types', 'name', this.typeList);
   }
 
   initAgent(data: any) {
@@ -73,8 +73,8 @@ export class AdminComponent implements OnInit {
       dataDisplay.push(agents);
     });
     this.agents = dataDisplay;
-    // window.location.reload();
   }
+
   initMission(data: any) {
     const dataDisplay: any = [];
     Object.keys(data).map(function (e) {
@@ -116,5 +116,17 @@ export class AdminComponent implements OnInit {
     );
     this.addMissionForm.reset();
     this.router.navigate(['/admin']);
+  }
+
+  getData(document: string, params: string, list: List[]) {
+    return this.crud.getDocument(document).subscribe((data: any) => {
+      Object.keys(data).map(function (e) {
+        const subArray = {
+          id: e,
+          item: data[e][params],
+        };
+        list.push(subArray);
+      });
+    });
   }
 }
