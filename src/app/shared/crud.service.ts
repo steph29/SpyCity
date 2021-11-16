@@ -5,6 +5,7 @@ import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { Person } from '../models/person';
 import { Mission } from '../models/mission';
+import { connectAuthEmulator } from '@firebase/auth';
 
 const app = initializeApp(environment.firebaseConfig);
 
@@ -103,7 +104,42 @@ export class CrudService {
   }
 
   // Update
-
+  updateMission(
+    id: string,
+    agent: [Person],
+    codeName: string,
+    contact: [Person],
+    country: number,
+    desc: string,
+    endDate: Date,
+    hideouts: [string],
+    mission: string,
+    status: number,
+    specialities: number,
+    startDate: Date,
+    target: [Person],
+    type: string
+  ) {
+    const missionOne: Mission = {
+      agent: agent,
+      codeName: codeName,
+      contact: contact,
+      country: country,
+      desc: desc,
+      endDate: endDate,
+      hideouts: hideouts,
+      mission: mission,
+      specialities: specialities,
+      startDate: startDate,
+      status: status,
+      target: target,
+      type: type,
+    };
+    return this.httpClient.patch<Mission>(
+      this.apiurl + '/missions/' + id + '.json',
+      missionOne
+    );
+  }
   // Delete
   deleteMission(id: string) {
     return this.httpClient.delete<Mission>(

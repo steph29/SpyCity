@@ -10,6 +10,7 @@ import { LoginComponent } from './component/login/login.component';
 import { LogoutComponent } from './component/logout/logout.component';
 import { RegisterComponent } from './component/register/register.component';
 import { UpdateAgentComponent } from './component/update-agent/update-agent.component';
+import { UpdateMissionComponent } from './component/update-mission/update-mission.component';
 import { RoutesGuardGuard } from './routes-guard.guard';
 
 const routes: Routes = [
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'updateAgent/:id',
     component: UpdateAgentComponent,
+  },
+  {
+    path: 'updateMission/:id',
+    component: UpdateMissionComponent,
   },
   {
     path: 'delete/:id',

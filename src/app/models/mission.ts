@@ -1,50 +1,47 @@
 import { Person } from './person';
 
 export class Mission {
-  public id: string;
-  public title: string;
-  public type: string;
-  public description: string;
-  public callsign: string;
-  public countryId: number;
-  public agents: [Person];
+  public agent: [Person];
+  public codeName: string;
   public contact: [Person];
+  public country: number;
+  public desc: string;
+  public endDate: Date;
+  public hideouts: [string];
+  public mission: string;
+  public specialities: number;
+  public startDate: Date;
+  public status: number;
   public target: [Person];
-  public statusId: number;
-  public hideoursId: [number];
-  public specialitiesId: number;
-  public dateOfBeginning: Date;
-  public dateOfEnd: Date;
+  public type: string;
 
   constructor(
-    id: string,
-    title: string,
-    type: string,
-    description: string,
-    callsign: string,
-    countryId: number,
-    agents: [Person],
+    agent: [Person],
+    codeName: string,
     contact: [Person],
+    country: number,
+    desc: string,
+    endDate: Date,
+    hideouts: [string],
+    mission: string,
+    specialities: number,
+    startDate: Date,
+    status: number,
     target: [Person],
-    statusId: number,
-    hideoursId: [number],
-    specialitiesId: number,
-    dateOfBeginning: Date,
-    dateOfEnd: Date
+    type: string
   ) {
-    this.id = id;
-    this.title = title;
-    this.type = type;
-    this.description = description;
-    this.callsign = callsign;
-    this.countryId = countryId;
-    this.agents = agents;
+    this.agent = agent;
+    this.codeName = codeName;
     this.contact = contact;
+    this.country = country;
+    this.desc = desc;
+    this.endDate = endDate;
+    this.hideouts = hideouts;
+    this.mission = mission;
+    this.status = status;
+    this.specialities = specialities;
+    this.startDate = startDate;
     this.target = target;
-    this.statusId = statusId;
-    this.hideoursId = hideoursId;
-    this.specialitiesId = specialitiesId;
-    this.dateOfBeginning = dateOfBeginning;
-    this.dateOfEnd = dateOfEnd;
+    this.type = type;
   }
 }

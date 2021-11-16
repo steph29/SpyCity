@@ -1,1 +1,283 @@
-<p>update-mission works!</p>
+<!-- First section -> create a mission -->
+
+<div class="container mt-3">
+  <form [formGroup]="updateMissionForm" (ngSubmit)="updateMission()">
+    <section class="container">
+      <h3 class="text-center mt-3">Update {{ mission.codeName }}'s mission</h3>
+      <div class="row">
+        <!-- first col -->
+        <div class="col">
+          <div class="form-group my-3">
+            <label class="col-form-label">Mission Title</label>
+            <input
+              type="text"
+              class="form-control"
+              name="mission"
+              formControlName="mission"
+            />
+          </div>
+          <div class="form-group my-3">
+            <label class="col-form-label">Country</label>
+            <select
+              name="country"
+              id="country"
+              formControlName="country"
+              class="form-control text-center linked-select"
+            >
+              <option>Select the country</option>
+
+              <option name="" value=""></option>
+            </select>
+          </div>
+          <div class="form-group my-3">
+            <label class="col-form-label">Code Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="codeName"
+              formControlName="codeName"
+            />
+          </div>
+          <div class="form-group my-3">
+            <label class="col-form-label">Target </label>
+            <select
+              name="target[]"
+              id="target"
+              formControlName="target"
+              class="form-control text-center linked-select"
+            >
+              <option>Select your Target</option>
+
+              <option name="" value=""></option>
+            </select>
+            <div class="newSelectTarget"></div>
+            <div>
+              <a
+                class="
+                  btn
+                  rounded-circle
+                  btn-outline-success
+                  d-flex
+                  circle
+                  float-end
+                "
+                id="addSelectTarget"
+                >+</a
+              >
+            </div>
+          </div>
+          <div class="form-group my-3">
+            <label class="col-form-label">Specialities </label>
+            <select
+              name="specialities"
+              class="form-control text-center linked-select"
+              id="specialities"
+              formControlName="specialities"
+            >
+              <option>Select your Specialities</option>
+
+              <option name="" value=""></option>
+            </select>
+          </div>
+          <div class="form-group my-3">
+            <div
+              class="
+                alertAgent
+                col-md-12
+                justify-content-center
+                align-items-center
+                d-flex
+              "
+              id="alertAgent"
+            ></div>
+            <label class="col-form-label">Agent </label>
+            <select
+              name="agent[]"
+              id="agent"
+              formControlName="agent"
+              class="form-control text-center linked-select"
+            >
+              <option>Select your Agent</option>
+            </select>
+            <div class="newSelectAgent"></div>
+            <div>
+              <a
+                class="
+                  btn
+                  rounded-circle
+                  btn-outline-success
+                  d-flex
+                  circle
+                  float-end
+                "
+                id="addSelectAgent"
+                >+</a
+              >
+            </div>
+          </div>
+
+          <div class="form-group my-3">
+            <label class="col-form-label">Description </label>
+            <textarea
+              type="text"
+              cols="10"
+              rows="5"
+              name="desc"
+              formControlName="desc"
+            ></textarea>
+          </div>
+        </div>
+        <!-- end of first col -->
+        <!-- second col -->
+        <div class="col">
+          <div class="col form-group my-3">
+            <div
+              class="
+                alertContact
+                col-md-12
+                justify-content-center
+                align-items-center
+                d-flex
+              "
+              id="alertContact"
+            ></div>
+            <label class="col-form-label">Contact</label>
+            <select
+              name="contact[]"
+              id="contact"
+              formControlName="contact"
+              class="form-control text-center linked-select"
+            >
+              <option>Select your contact</option>
+
+              <option name="" value=""></option>
+            </select>
+            <div class="newSelectContact"></div>
+            <div>
+              <a
+                class="
+                  btn
+                  rounded-circle
+                  btn-outline-success
+                  d-flex
+                  circle
+                  float-end
+                "
+                id="addSelectContact"
+                >+</a
+              >
+            </div>
+          </div>
+
+          <div class="form-group my-3">
+            <label class="col-form-label">Type of mission </label>
+            <select
+              name="type"
+              class="form-control text-center linked-select"
+              id="type"
+              formControlName="type"
+            >
+              <option>Select your Type of mission</option>
+
+              <option name="" value=""></option>
+            </select>
+          </div>
+          <div class="form-group my-3">
+            <label class="col-form-label">Status </label>
+            <select
+              name="status"
+              formControlName="status"
+              class="form-control text-center linked-select"
+            >
+              <option>Select the status</option>
+
+              <option name=""></option>
+            </select>
+          </div>
+          <div class="form-group my-3">
+            <label class="col-form-label">Hideouts </label>
+            <select
+              name="hideouts[]"
+              formControlName="hideouts"
+              class="form-control text-center linked-select"
+              id="hideouts"
+            >
+              <option>Select your hideouts</option>
+            </select>
+            <div class="newSelectHideouts"></div>
+            <div>
+              <a
+                class="
+                  btn
+                  rounded-circle
+                  btn-outline-success
+                  d-flex
+                  circle
+                  float-end
+                "
+                id="addSelectHideouts"
+                >+</a
+              >
+            </div>
+          </div>
+
+          <div class="form-group my-3">
+            <label class="col-form-label">Date of beginning </label>
+            <input
+              type="date"
+              class="form-control"
+              name="startDate"
+              formControlName="startDate"
+            />
+          </div>
+          <div class="form-group my-3">
+            <label class="col-form-label">Date of end </label>
+            <input
+              type="date"
+              class="form-control"
+              name="endDate"
+              formControlName="endDate"
+            />
+          </div>
+        </div>
+        <!-- end of secont col  -->
+        <div class="col">
+          <div class="form-group my-3">
+            <button
+              type="submit"
+              [disabled]="updateMissionForm.invalid"
+              class="btn btn-outline-success float-end loginButton"
+              name="add_mission"
+            >
+              Update mission
+            </button>
+          </div>
+
+          <div class="form-group my-3">
+            <a
+              href="addAgent"
+              class="btn btn-outline-success float-end loginButton"
+              >Add agent / contact/ target</a
+            >
+          </div>
+          <div class="form-group my-3">
+            <button
+              type="submit"
+              class="btn btn-outline-danger float-end loginButton"
+              name=""
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </form>
+
+  <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"
+  ></script>
+  <script src="/js/admin.js"></script>
+</div>
