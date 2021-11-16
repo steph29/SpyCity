@@ -5,8 +5,6 @@ import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { Person } from '../models/person';
 import { Mission } from '../models/mission';
-import { connectAuthEmulator } from '@firebase/auth';
-import { stat } from 'fs';
 
 const app = initializeApp(environment.firebaseConfig);
 
@@ -187,5 +185,10 @@ export class CrudService {
     return this.httpClient.delete<Mission>(
       this.apiurl + '/missions/' + id + '.json/'
     );
+  }
+
+  // **************** Get Data *******************
+  getDocument(document: string) {
+    return this.httpClient.get(this.apiurl + '/' + document + '.json');
   }
 }
