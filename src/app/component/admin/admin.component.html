@@ -54,7 +54,7 @@
             <td></td>
             <td>
               <a
-                href="/updateAgent?id={{ item.id }}"
+                [routerLink]="['/updateAgent', item.id]"
                 class="btn btn-outline-success btn-sm"
                 name="update_agent"
               >
@@ -121,7 +121,7 @@
             >
               <option>Select your Target</option>
 
-              <option name="<?= $key ; ?>" value="<?= $key ;?>"></option>
+              <option name="" value=""></option>
             </select>
             <div class="newSelectTarget"></div>
             <div>

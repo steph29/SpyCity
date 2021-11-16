@@ -29,7 +29,6 @@ export class DeleteComponent implements OnInit {
   getId() {
     return this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
-      console.log(this.id);
     });
   }
 }

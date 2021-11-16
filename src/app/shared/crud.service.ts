@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { Person } from '../models/person';
@@ -19,7 +19,7 @@ export class CrudService {
   apiurl =
     'https://spyfield-b2064-default-rtdb.europe-west1.firebasedatabase.app';
   httpOptions = {
-    header: new Headers({
+    header: new HttpHeaders({
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Headers':
         'Origin, X-Requested-With, Content-Type, Accept',
@@ -33,25 +33,25 @@ export class CrudService {
   // CREATE
   addAgent(
     type: string,
-    name: string,
-    firstname: string,
+    lname: string,
+    fname: string,
     callsign: string,
     birthday: string,
     nationalityId: number,
-    specialityId: [number]
+    specialities: [number]
   ) {
     const person: Person = {
       type: type,
-      name: name,
-      firstname: firstname,
+      lname: lname,
+      fname: fname,
       callsign: callsign,
       birthday: birthday,
       nationalityId: nationalityId,
-      specialityId: specialityId,
+      specialities: specialities,
     };
 
     return this.httpClient
-      .post<{ message: string }>(this.mongoUrl + '/' + type, person)
+      .post<{ message: string }>(this.apiurl + '/' + type + '.json', person)
       .subscribe(() => {
         this.persons.push(person);
         this.personsUpdated.next([...this.persons]);
@@ -64,8 +64,26 @@ export class CrudService {
   }
 
   // UPDATE
-  updateAgent(id: string, person: Person) {
-    return this.httpClient.put<Person>(
+  updateAgent(
+    id: string,
+    type: string,
+    lname: string,
+    fname: string,
+    callsign: string,
+    birthday: string,
+    nationalityId: number,
+    specialities: [number]
+  ) {
+    const person: Person = {
+      type: type,
+      lname: lname,
+      fname: fname,
+      callsign: callsign,
+      birthday: birthday,
+      nationalityId: nationalityId,
+      specialities: specialities,
+    };
+    return this.httpClient.patch<Person>(
       this.apiurl + '/agent/' + id + '.json',
       person
     );

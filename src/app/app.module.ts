@@ -19,6 +19,7 @@ import { LogoutComponent } from './component/logout/logout.component';
 import { AddAgentComponent } from './component/add-agent/add-agent.component';
 import { DeleteComponent } from './component/delete/delete.component';
 import { UpdateAgentComponent } from './component/update-agent/update-agent.component';
+import { UpdateMissionComponent } from './component/update-mission/update-mission.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { UpdateAgentComponent } from './component/update-agent/update-agent.comp
     AddAgentComponent,
     DeleteComponent,
     UpdateAgentComponent,
+    UpdateMissionComponent,
   ],
   imports: [
     BrowserModule,

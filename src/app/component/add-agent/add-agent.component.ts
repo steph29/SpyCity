@@ -34,51 +34,49 @@ export class AddAgentComponent implements OnInit {
 
   addPersonForm = new FormGroup({
     type: new FormControl(''),
-    name: new FormControl(''),
-    firstname: new FormControl(''),
+    lname: new FormControl(''),
+    fname: new FormControl(''),
     callsign: new FormControl(''),
     birthday: new FormControl(''),
     nationalityId: new FormControl(''),
-    specialityId: new FormControl(''),
+    specialities: new FormControl(''),
   });
 
   constructor(
     private formBuilder: FormBuilder,
     private crud: CrudService,
-    private router: Router,
-    private auth: AuthService,
-    private httpClient: HttpClient
+    private router: Router
   ) {}
 
   ngOnInit() {
     const addPersonForm = this.formBuilder.group({
       type: ['', [Validators.required]],
-      name: ['', [Validators.required]],
-      firstname: ['', [Validators.required]],
+      lname: ['', [Validators.required]],
+      fname: ['', [Validators.required]],
       callsign: ['', [Validators.required]],
       birthday: ['', [Validators.required]],
       nationalityId: ['', [Validators.required]],
-      specialityId: ['', [Validators.required]],
+      specialities: ['', [Validators.required]],
     });
   }
 
   addNewPerson() {
     const type = this.addPersonForm.get('type')?.value;
-    const name = this.addPersonForm.get('name')?.value;
-    const firstname = this.addPersonForm.get('firstname')?.value;
+    const lname = this.addPersonForm.get('lname')?.value;
+    const fname = this.addPersonForm.get('fname')?.value;
     const callsign = this.addPersonForm.get('callsign')?.value;
     const birthday = this.addPersonForm.get('birthday')?.value;
     const nationalityId = this.addPersonForm.get('nationalityId')?.value;
-    const specialityId = this.addPersonForm.get('specialityId')?.value;
+    const specialities = this.addPersonForm.get('specialities')?.value;
 
     this.crud.addAgent(
       type,
-      name,
-      firstname,
+      lname,
+      fname,
       callsign,
       birthday,
       nationalityId,
-      specialityId
+      specialities
     );
     this.addPersonForm.reset();
     this.router.navigate(['/admin']);
