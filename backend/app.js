@@ -2,11 +2,25 @@ const express = require("express");
 const cors = require("cors");
 const firebase = require("firebase/database");
 const bodyParser = require("body-parser");
+const Person = require("./model/person");
+const mongoose = require("mongoose");
 
 const url =
   "https://spyfield-b2064-default-rtdb.europe-west1.firebasedatabase.app";
 const app = express();
+mongoose
+  .connect(
+    "mongodb+srv://fingolfin3529:Ywdt7w2013m@cluster0.jseo0.mongodb.net/spycitydb?retryWrites=true&w=majority"
+  )
+  .then(() => {
+    console.log("Connected to mongo DB");
+  })
+  .catch(() => {
+    console.log("Connectio failed");
+  });
+
 app.use(cors());
+
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -29,27 +43,28 @@ app.use((req, res, next) => {
 
 // ******* PERSON DATA *********
 // Create data on agent
-app.post(url + "/agent.json", (req, res, next) => {
-  const person = req.body;
-  console.log(person);
+app.post("/agent", (req, res, next) => {
+  const person = new Person({
+    type: req.body.type,
+    name: req.body.name,
+    firstname: req.body.firstname,
+    callsign: req.body.callsign,
+    birthday: req.body.birthday,
+    nationalityId: req.body.nationalityId,
+    specialityId: req.body.specialityId,
+  });
+  person.save();
   res.status(201).json({
     message: "Person fetched successfully!",
   });
 });
 
-app.get(url + "/agent.json", (req, res, next) => {
-  const persons = {
-    type: "Agent",
-    name: "Pan",
-    firstname: "Peter",
-    callsign: "Hey Peeeteer",
-    birthday: "27 / 08 / 1987",
-    nationality: 14,
-    speciality: 5,
-  };
-  res.status(200).json({
-    message: "Persons fetched successfully!",
-    person: persons,
+app.get("/agent", (req, res, next) => {
+  Person.find().then((documents) => {
+    res.status(200).json({
+      message: "Persons fetched successfully!",
+      person: persons,
+    });
   });
 });
 
@@ -69,4 +84,5 @@ app.put(url + "/missions.json", (req, res, next) => {});
 
 // Delete data on mission
 app.delete(url + "/missions.json", (req, res, next) => {});
+
 module.exports = app;

@@ -17,6 +17,8 @@ import { ErrorComponent } from './component/error/error.component';
 import { RoutesGuardGuard } from './routes-guard.guard';
 import { LogoutComponent } from './component/logout/logout.component';
 import { AddAgentComponent } from './component/add-agent/add-agent.component';
+import { DeleteComponent } from './component/delete/delete.component';
+import { UpdateAgentComponent } from './component/update-agent/update-agent.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { AddAgentComponent } from './component/add-agent/add-agent.component';
     ErrorComponent,
     LogoutComponent,
     AddAgentComponent,
+    DeleteComponent,
+    UpdateAgentComponent,
   ],
   imports: [
     BrowserModule,

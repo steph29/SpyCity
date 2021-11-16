@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { CrudService } from 'src/app/shared/crud.service';
+import { RouterPreloader } from '@angular/router';
 
 const app = initializeApp(environment.firebaseConfig);
 
@@ -12,19 +13,13 @@ const app = initializeApp(environment.firebaseConfig);
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
-  person = {
-    type: 'Agent',
-    name: 'Pan',
-    firstname: 'Peter',
-    callsign: 'Hey Peeeteer',
-    birthday: '27 / 08 / 1987',
-    nationality: 14,
-    speciality: 5,
-  };
-
-  missions = [];
-  agents = [];
-  constructor(private httpClient: HttpClient, public crud: CrudService) {}
+  missions = [{ id: 1, mission: 'test' }];
+  agents = [{ id: 1, agent: 'testAgent' }];
+  constructor(
+    private httpClient: HttpClient,
+    public crud: CrudService,
+    private route: RouterPreloader
+  ) {}
 
   ngOnInit() {
     this.crud.getAgent().subscribe((data) => {
@@ -42,6 +37,7 @@ export class AdminComponent implements OnInit {
       dataDisplay.push(agents);
     });
     this.agents = dataDisplay;
+    // window.location.reload();
   }
   initMission(data: any) {
     const dataDisplay: any = [];

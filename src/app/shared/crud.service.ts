@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { Person } from '../models/person';
+import { Mission } from '../models/mission';
 
 const app = initializeApp(environment.firebaseConfig);
 
@@ -14,6 +15,7 @@ export class CrudService {
   private persons: Person[] = [];
   private personsUpdated = new Subject<Person[]>();
 
+  mongoUrl = 'https:localhost:3000';
   apiurl =
     'https://spyfield-b2064-default-rtdb.europe-west1.firebasedatabase.app';
   httpOptions = {
@@ -49,11 +51,7 @@ export class CrudService {
     };
 
     return this.httpClient
-      .post<{ message: string }>(
-        this.apiurl + '/' + type + '.json',
-        person,
-        this.httpOptions
-      )
+      .post<{ message: string }>(this.mongoUrl + '/' + type, person)
       .subscribe(() => {
         this.persons.push(person);
         this.personsUpdated.next([...this.persons]);
@@ -66,11 +64,18 @@ export class CrudService {
   }
 
   // UPDATE
-
+  updateAgent(id: string, person: Person) {
+    return this.httpClient.put<Person>(
+      this.apiurl + '/agent/' + id + '.json',
+      person
+    );
+  }
   // DELETE
 
-  deleteAgent() {
-    return this.httpClient.delete<Person>(this.apiurl + '/agent.json/');
+  deleteAgent(id: string) {
+    return this.httpClient.delete<Person>(
+      this.apiurl + '/agent/' + id + '.json/'
+    );
   }
 
   // **************** Missions *******************
@@ -82,4 +87,9 @@ export class CrudService {
   // Update
 
   // Delete
+  deleteMission(id: string) {
+    return this.httpClient.delete<Mission>(
+      this.apiurl + '/missions/' + id + '.json/'
+    );
+  }
 }
