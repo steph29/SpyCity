@@ -38,9 +38,9 @@ export class Mission {
     this.endDate = endDate;
     this.hideouts = hideouts;
     this.mission = mission;
-    this.status = status;
     this.specialities = specialities;
     this.startDate = startDate;
+    this.status = status;
     this.target = target;
     this.type = type;
   }

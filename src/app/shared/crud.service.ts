@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Person } from '../models/person';
 import { Mission } from '../models/mission';
 import { connectAuthEmulator } from '@firebase/auth';
+import { stat } from 'fs';
 
 const app = initializeApp(environment.firebaseConfig);
 
@@ -15,6 +16,8 @@ const app = initializeApp(environment.firebaseConfig);
 export class CrudService {
   private persons: Person[] = [];
   private personsUpdated = new Subject<Person[]>();
+  private missions: Mission[] = [];
+  private missionsUpdated = new Subject<Mission[]>();
 
   mongoUrl = 'https:localhost:3000';
   apiurl =
@@ -98,6 +101,45 @@ export class CrudService {
   }
 
   // **************** Missions *******************
+  // Create
+  addMission(
+    agent: [Person],
+    codeName: string,
+    contact: [Person],
+    country: number,
+    desc: string,
+    endDate: Date,
+    hideouts: [string],
+    mission: string,
+    specialities: number,
+    startDate: Date,
+    status: number,
+    target: [Person],
+    type: string
+  ) {
+    const missionOne: Mission = {
+      agent: agent,
+      codeName: codeName,
+      contact: contact,
+      country: country,
+      desc: desc,
+      endDate: endDate,
+      hideouts: hideouts,
+      mission: mission,
+      specialities: specialities,
+      startDate: startDate,
+      status: status,
+      target: target,
+      type: type,
+    };
+
+    return this.httpClient
+      .post<Mission>(this.apiurl + '/missions.json', missionOne)
+      .subscribe(() => {
+        this.missions.push(missionOne);
+        this.missionsUpdated.next([...this.missions]);
+      });
+  }
   // Read
   getMission() {
     return this.httpClient.get(this.apiurl + '/missions.json');
@@ -114,9 +156,9 @@ export class CrudService {
     endDate: Date,
     hideouts: [string],
     mission: string,
-    status: number,
     specialities: number,
     startDate: Date,
+    status: number,
     target: [Person],
     type: string
   ) {
