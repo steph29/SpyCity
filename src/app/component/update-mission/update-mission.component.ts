@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Mission } from 'src/app/models/mission';
 import { CrudService } from 'src/app/shared/crud.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Person } from 'src/app/models/person';
 
 export interface List {
   id: string;
@@ -16,7 +17,53 @@ export interface List {
 export class UpdateMissionComponent implements OnInit {
   id = '';
   setOfMission: [Mission[]] = [[]];
-  mission: Mission[] = [];
+  mission: Mission[] = [
+    {
+      agent: [
+        {
+          type: '',
+          lname: '',
+          fname: '',
+          callsign: '',
+          birthday: '',
+          nationalityId: 0,
+          specialities: [0],
+        },
+      ],
+      codeName: '',
+      contact: [
+        {
+          type: '',
+          lname: '',
+          fname: '',
+          callsign: '',
+          birthday: '',
+          nationalityId: 0,
+          specialities: [0],
+        },
+      ],
+      country: 0,
+      desc: '',
+      endDate: new Date(),
+      hideouts: [''],
+      mission: '',
+      specialities: 90,
+      startDate: new Date(),
+      status: 0,
+      target: [
+        {
+          type: '',
+          lname: '',
+          fname: '',
+          callsign: '',
+          birthday: '',
+          nationalityId: 0,
+          specialities: [0],
+        },
+      ],
+      type: '',
+    },
+  ];
 
   countriesList: List[] = [];
   targetList: List[] = [];
@@ -52,13 +99,6 @@ export class UpdateMissionComponent implements OnInit {
   ngOnInit(): void {
     this.crud.getMission().subscribe((data) => {
       this.getMission(data);
-      this.getId();
-      for (var i = 0; i < this.setOfMission.length; i++) {
-        if (this.setOfMission[i]['id'] === this.id) {
-          this.mission = this.setOfMission[i];
-          console.log(this.mission);
-        }
-      }
     });
 
     this.getData('target', 'callsign', this.targetList);
@@ -72,88 +112,75 @@ export class UpdateMissionComponent implements OnInit {
   }
 
   getMission(data: any) {
-    const dataArray: any = [];
-    Object.keys(data).map(function (e) {
-      const mission = {
-        id: e,
-        agent: [data[e]['agent']],
-        codeName: data[e]['codeName'],
-        contact: [data[e]['contact']],
-        country: data[e]['country'],
-        desc: data[e]['desc'],
-        endDate: data[e]['endDate'],
-        hideouts: [data[e]['hideouts']],
-        mission: data[e]['mission'],
-        specialities: data[e]['specialities'],
-        startDate: data[e]['startDate'],
-        status: data[e]['status'],
-        target: data[e]['target'],
-        type: data[e]['type'],
-      };
-      dataArray.push(mission);
+    const dataDisplay: any = [];
+    // On recupère l'ID passé en URL
+    this.activatedRoute.params.subscribe((params) => {
+      this.id = params['id'];
     });
+    const dataArray: any = [];
+    for (var i = 0; i < Object.keys(data).length; i++) {
+      if (Object.keys(data)[i] === this.id) {
+        const dataMission = Object.values(data)[i];
+        dataArray.push(dataMission);
+      }
+      this.mission = dataArray;
+    }
     this.setOfMission = dataArray;
   }
 
-  getId() {
-    return this.activatedRoute.params.subscribe((params) => {
-      this.id = params['id'];
-    });
-  }
-
-  updateMission(id: string) {
+  updateMission() {
     const agent =
       this.updateMissionForm.get('agent')?.value === ''
-        ? this.mission['agent']
+        ? this.mission[0].agent
         : this.updateMissionForm.get('agent')?.value;
     const codeName =
       this.updateMissionForm.get('codeName')?.value === ''
-        ? this.mission['codeName']
+        ? this.mission[0].codeName
         : this.updateMissionForm.get('codeName')?.value;
 
     const contact =
       this.updateMissionForm.get('contact')?.value === ''
-        ? this.mission['contact']
+        ? this.mission[0].contact
         : this.updateMissionForm.get('contact')?.value;
     const country =
       this.updateMissionForm.get('country')?.value === ''
-        ? this.mission['country']
+        ? this.mission[0].country
         : this.updateMissionForm.get('country')?.value;
     const desc =
       this.updateMissionForm.get('desc')?.value === ''
-        ? this.mission['desc']
+        ? this.mission[0].desc
         : this.updateMissionForm.get('desc')?.value;
     const endDate =
       this.updateMissionForm.get('endDate')?.value === ''
-        ? this.mission['endDate']
+        ? this.mission[0].endDate
         : this.updateMissionForm.get('endDate')?.value;
     const hideouts =
       this.updateMissionForm.get('hideouts')?.value === ''
-        ? this.mission['hideouts']
+        ? this.mission[0].hideouts
         : this.updateMissionForm.get('hideouts')?.value;
     const mission =
       this.updateMissionForm.get('mission')?.value === ''
-        ? this.mission['mission']
+        ? this.mission[0].mission
         : this.updateMissionForm.get('mission')?.value;
     const specialities =
       this.updateMissionForm.get('specialities')?.value === ''
-        ? this.mission['specialities']
+        ? this.mission[0].specialities
         : this.updateMissionForm.get('specialities')?.value;
     const startDate =
       this.updateMissionForm.get('startDate')?.value === ''
-        ? this.mission['startDate']
+        ? this.mission[0].startDate
         : this.updateMissionForm.get('startDate')?.value;
     const status =
       this.updateMissionForm.get('status')?.value === ''
-        ? this.mission['status']
+        ? this.mission[0].status
         : this.updateMissionForm.get('status')?.value;
     const target =
       this.updateMissionForm.get('target')?.value === ''
-        ? this.mission['target']
+        ? this.mission[0].target
         : this.updateMissionForm.get('target')?.value;
     const type =
       this.updateMissionForm.get('type')?.value === ''
-        ? this.mission['type']
+        ? this.mission[0].type
         : this.updateMissionForm.get('type')?.value;
 
     this.crud

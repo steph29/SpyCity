@@ -10,29 +10,20 @@
         <tbody>
           <tr *ngFor="let item of missions">
             <td id="{{ item.id }}">{{ item.mission }}</td>
-
             <td>
               <a
                 [routerLink]="['/updateMission', item.id]"
                 class="btn btn-outline-success btn-sm"
-              >
-                <img src="/assets/write.png" alt="" />
-              </a>
+                ><img src="/assets/write.png" alt="edit"
+              /></a>
             </td>
             <td>
               <a
                 [routerLink]="['/delete', item.id]"
-                type="submit"
-                name="delete"
-                value=""
-                class="btn btn-outline-danger btn-sm my-0"
-              >
-                <img src="/assets/bin.png" alt="" />
-              </a>
+                class="btn btn-outline-danger btn-sm"
+                ><img src="/assets/bin.png" alt="delete"
+              /></a>
             </td>
-          </tr>
-          <tr>
-            <td colspan="2">No record Found</td>
           </tr>
         </tbody>
       </table>
@@ -50,32 +41,25 @@
         <tbody>
           <tr *ngFor="let item of agents">
             <td id="{{ item.id }}">{{ item.agent }}</td>
-
-            <td></td>
             <td>
               <a
                 [routerLink]="['/updateAgent', item.id]"
                 class="btn btn-outline-success btn-sm"
                 name="update_agent"
               >
-                <img src="/assets/write.png" alt="" />
+                <img src="/assets/write.png" alt="edit" />
               </a>
             </td>
             <td>
-              <input type="hidden" value="" name="id_delete_agent" />
               <a
                 [routerLink]="['/delete', item.id]"
                 type="submit"
                 name="delete_contact"
                 class="btn btn-outline-danger btn-sm my-0"
               >
-                <img src="/assets/bin.png" alt="" />
+                <img src="/assets/bin.png" alt="delete" />
               </a>
             </td>
-          </tr>
-
-          <tr>
-            <td colspan="2">No record Found</td>
           </tr>
         </tbody>
       </table>

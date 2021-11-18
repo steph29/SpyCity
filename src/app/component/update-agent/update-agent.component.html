@@ -1,28 +1,10 @@
-<h2>Update {{ compagny.callsign }}</h2>
+<h2>Update</h2>
 <div class="container mt-3">
   <form [formGroup]="updatePersonForm" (ngSubmit)="updatePerson()">
     <section class="container text-center">
       <div class="row">
         <div class="col">
           <div class="form-group my-3">
-            <select
-              name="type"
-              id="type"
-              class="form-control text-center linked-select"
-              formControlName="type"
-            >
-              <option>Select the type</option>
-              <option *ngFor="let person of typePerson">
-                {{ person.type }}
-              </option>
-            </select>
-            <div
-              class="error-block"
-              *ngIf="submitted && handleError('name', 'required')"
-            >
-              You must provide a value!
-            </div>
-
             <label for="text" class="col-form-label">name </label>
             <input
               type="lname"
@@ -49,29 +31,30 @@
             />
           </div>
         </div>
-
         <div class="col">
-          <label for="text" class="col-form-label">birthday </label>
-          <input
-            type="birthday"
-            class="form-control"
-            name="birthday"
-            formControlName="birthday"
-          />
-          <label for="text" class="col-form-label">nationality </label>
-          <input
-            type="nationalityId"
-            class="form-control"
-            name="nationalityId"
-            formControlName="nationalityId"
-          />
-          <label for="text" class="col-form-label">speciality </label>
-          <input
-            type="specialities"
-            class="form-control"
-            name="specialities"
-            formControlName="specialities"
-          />
+          <div class="form-group my-3">
+            <label for="text" class="col-form-label">birthday </label>
+            <input
+              type="birthday"
+              class="form-control"
+              name="birthday"
+              formControlName="birthday"
+            />
+            <label for="text" class="col-form-label">nationality </label>
+            <input
+              type="nationalityId"
+              class="form-control"
+              name="nationalityId"
+              formControlName="nationalityId"
+            />
+            <label for="text" class="col-form-label">speciality </label>
+            <input
+              type="specialities"
+              class="form-control"
+              name="specialities"
+              formControlName="specialities"
+            />
+          </div>
         </div>
       </div>
       <button

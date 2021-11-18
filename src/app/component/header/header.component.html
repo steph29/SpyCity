@@ -15,19 +15,30 @@
     </button>
     <div class="collapse navbar-collapse mx-3" id="navbarNav">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="login" *ngIf="!isAuth"> login</a>
+        <!-- <li class="nav-item">
+          <a class="nav-link" [routerLink]="login" *ngIf="!isAuth"> login</a>
+        </li> -->
+        <li>
+          <a
+            [routerLink]="['/login']"
+            routerLinkActive="active"
+            *ngIf="!isAuth"
+            class="nav-link"
+            >Login</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="register" *ngIf="!isAuth"> Register</a>
+          <a class="nav-link" [routerLink]="['/register']" *ngIf="!isAuth">
+            Register</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href=""> Mission</a>
+          <a class="nav-link" [routerLink]="['/']"> Mission</a>
         </li>
         <li class="nav-item">
           <a
             class="nav-link"
-            href="admin"
+            [routerLink]="['/admin']"
             routerLinkActive="ative"
             *ngIf="isAuth"
           >
@@ -37,7 +48,7 @@
         <li class="nav-item">
           <a
             class="nav-link"
-            href="logout"
+            [routerLink]="['/logout']"
             routerLinkActive="ative"
             *ngIf="isAuth"
           >
@@ -45,7 +56,7 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="contact"> Contact </a>
+          <a class="nav-link" [routerLink]="['/contact']"> Contact </a>
         </li>
       </ul>
     </div>
