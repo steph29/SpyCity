@@ -4,6 +4,10 @@ import { Mission } from 'src/app/models/mission';
 import { CrudService } from 'src/app/shared/crud.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
+export interface List {
+  id: string;
+  item: string;
+}
 @Component({
   selector: 'app-update-mission',
   templateUrl: './update-mission.component.html',
@@ -13,6 +17,15 @@ export class UpdateMissionComponent implements OnInit {
   id = '';
   setOfMission: [Mission[]] = [[]];
   mission: Mission[] = [];
+
+  countriesList: List[] = [];
+  targetList: List[] = [];
+  agentList: List[] = [];
+  specialitiesList: List[] = [];
+  contactList: List[] = [];
+  statusList: List[] = [];
+  hideoutsList: List[] = [];
+  typeList: List[] = [];
 
   updateMissionForm = new FormGroup({
     agent: new FormControl(''),
@@ -47,6 +60,15 @@ export class UpdateMissionComponent implements OnInit {
         }
       }
     });
+
+    this.getData('target', 'callsign', this.targetList);
+    this.getData('countries', 'name', this.countriesList);
+    this.getData('contact', 'callsign', this.contactList);
+    this.getData('specialities', 'name', this.specialitiesList);
+    this.getData('status', 'state', this.statusList);
+    this.getData('agent', 'callsign', this.agentList);
+    this.getData('countries', 'capital', this.hideoutsList);
+    this.getData('types', 'name', this.typeList);
   }
 
   getMission(data: any) {
@@ -155,5 +177,17 @@ export class UpdateMissionComponent implements OnInit {
         console.log(data);
       });
     this.router.navigate(['/admin']);
+  }
+
+  getData(document: string, params: string, list: List[]) {
+    return this.crud.getDocument(document).subscribe((data: any) => {
+      Object.keys(data).map(function (e) {
+        const subArray = {
+          id: e,
+          item: data[e][params],
+        };
+        list.push(subArray);
+      });
+    });
   }
 }

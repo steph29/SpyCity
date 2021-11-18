@@ -1,5 +1,3 @@
-<!-- First section -> create a mission -->
-
 <div class="container mt-3">
   <form [formGroup]="updateMissionForm" (ngSubmit)="updateMission()">
     <section class="container">
@@ -19,14 +17,14 @@
           <div class="form-group my-3">
             <label class="col-form-label">Country</label>
             <select
-              name="country"
-              id="country"
               formControlName="country"
               class="form-control text-center linked-select"
             >
               <option>Select the country</option>
 
-              <option name="" value=""></option>
+              <option *ngFor="let item of countriesList">
+                {{ item.item }}
+              </option>
             </select>
           </div>
           <div class="form-group my-3">
@@ -41,14 +39,14 @@
           <div class="form-group my-3">
             <label class="col-form-label">Target </label>
             <select
-              name="target[]"
-              id="target"
               formControlName="target"
               class="form-control text-center linked-select"
             >
               <option>Select your Target</option>
 
-              <option name="" value=""></option>
+              <option *ngFor="let item of targetList">
+                {{ item.item }}
+              </option>
             </select>
             <div class="newSelectTarget"></div>
             <div>
@@ -69,14 +67,14 @@
           <div class="form-group my-3">
             <label class="col-form-label">Specialities </label>
             <select
-              name="specialities"
-              class="form-control text-center linked-select"
-              id="specialities"
               formControlName="specialities"
+              class="form-control text-center linked-select"
             >
               <option>Select your Specialities</option>
 
-              <option name="" value=""></option>
+              <option *ngFor="let item of specialitiesList">
+                {{ item.item }}
+              </option>
             </select>
           </div>
           <div class="form-group my-3">
@@ -92,13 +90,15 @@
             ></div>
             <label class="col-form-label">Agent </label>
             <select
-              name="agent[]"
-              id="agent"
               formControlName="agent"
               class="form-control text-center linked-select"
             >
               <option>Select your Agent</option>
+              <option *ngFor="let item of agentList">
+                {{ item.item }}
+              </option>
             </select>
+
             <div class="newSelectAgent"></div>
             <div>
               <a
@@ -143,14 +143,14 @@
             ></div>
             <label class="col-form-label">Contact</label>
             <select
-              name="contact[]"
-              id="contact"
               formControlName="contact"
               class="form-control text-center linked-select"
             >
               <option>Select your contact</option>
 
-              <option name="" value=""></option>
+              <option *ngFor="let item of contactList">
+                {{ item.item }}
+              </option>
             </select>
             <div class="newSelectContact"></div>
             <div>
@@ -172,37 +172,33 @@
           <div class="form-group my-3">
             <label class="col-form-label">Type of mission </label>
             <select
-              name="type"
-              class="form-control text-center linked-select"
-              id="type"
               formControlName="type"
+              class="form-control text-center linked-select"
             >
               <option>Select your Type of mission</option>
 
-              <option name="" value=""></option>
+              <option *ngFor="let item of typeList">{{ item.item }}</option>
             </select>
           </div>
           <div class="form-group my-3">
             <label class="col-form-label">Status </label>
             <select
-              name="status"
               formControlName="status"
               class="form-control text-center linked-select"
             >
               <option>Select the status</option>
 
-              <option name=""></option>
+              <option *ngFor="let item of statusList">{{ item.item }}</option>
             </select>
           </div>
           <div class="form-group my-3">
             <label class="col-form-label">Hideouts </label>
             <select
-              name="hideouts[]"
               formControlName="hideouts"
               class="form-control text-center linked-select"
-              id="hideouts"
             >
               <option>Select your hideouts</option>
+              <option *ngFor="let item of hideoutsList">{{ item.item }}</option>
             </select>
             <div class="newSelectHideouts"></div>
             <div>
@@ -273,11 +269,4 @@
       </div>
     </section>
   </form>
-
-  <script
-    src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-    crossorigin="anonymous"
-  ></script>
-  <script src="/js/admin.js"></script>
 </div>
