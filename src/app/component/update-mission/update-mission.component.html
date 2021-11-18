@@ -1,7 +1,9 @@
 <div class="container mt-3">
   <form [formGroup]="updateMissionForm" (ngSubmit)="updateMission()">
     <section class="container">
-      <h3 class="text-center mt-3">Update 's mission</h3>
+      <h3 class="text-center mt-3">
+        Update {{ mission[0].codeName }}'s mission
+      </h3>
       <div class="row">
         <!-- first col -->
         <div class="col">

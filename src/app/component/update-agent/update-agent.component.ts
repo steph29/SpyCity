@@ -47,7 +47,6 @@ export class UpdateAgentComponent implements OnInit {
   ngOnInit() {
     this.crud.getAgent().subscribe((data) => {
       this.getAgents(data);
-      console.log(data);
     });
   }
 
