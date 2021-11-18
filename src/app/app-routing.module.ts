@@ -1,54 +1,62 @@
 import { ContentChild, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AddAgentComponent } from './component/add-agent/add-agent.component';
-import { AdminComponent } from './component/admin/admin.component';
-import { ContactComponent } from './component/contact/contact.component';
-import { DeleteComponent } from './component/delete/delete.component';
 import { ErrorComponent } from './component/error/error.component';
 import { HomeComponent } from './component/home/home.component';
-import { LoginComponent } from './component/login/login.component';
-import { LogoutComponent } from './component/logout/logout.component';
-import { RegisterComponent } from './component/register/register.component';
-import { UpdateAgentComponent } from './component/update-agent/update-agent.component';
-import { UpdateMissionComponent } from './component/update-mission/update-mission.component';
 import { RoutesGuardGuard } from './routes-guard.guard';
 
 const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent,
+    loadChildren: () =>
+      import('./modules/login/login.module').then((m) => m.LoginModule),
   },
   {
     path: 'logout',
-    component: LogoutComponent,
+    loadChildren: () =>
+      import('./modules/logout/logout.module').then((m) => m.LogoutModule),
   },
   {
     path: 'register',
-    component: RegisterComponent,
+    loadChildren: () =>
+      import('./modules/register/register.module').then(
+        (m) => m.RegisterModule
+      ),
   },
   {
     path: 'contact',
-    component: ContactComponent,
+    loadChildren: () =>
+      import('./modules/contact/contact.module').then((m) => m.ContactModule),
   },
   {
     path: 'addAgent',
-    component: AddAgentComponent,
+    loadChildren: () =>
+      import('./modules/add-agent/add-agent.module').then(
+        (m) => m.AddAgentModule
+      ),
   },
   {
     path: 'updateAgent/:id',
-    component: UpdateAgentComponent,
+    loadChildren: () =>
+      import('./modules/update-agent/update-agent.module').then(
+        (m) => m.UpdateAgentModule
+      ),
   },
   {
     path: 'updateMission/:id',
-    component: UpdateMissionComponent,
+    loadChildren: () =>
+      import('./modules/update-mission/update-mission.module').then(
+        (m) => m.UpdateMissionModule
+      ),
   },
   {
     path: 'delete/:id',
-    component: DeleteComponent,
+    loadChildren: () =>
+      import('./modules/delete/delete.module').then((m) => m.DeleteModule),
   },
   {
     path: 'admin',
-    component: AdminComponent,
+    loadChildren: () =>
+      import('./modules/admin/admin.module').then((m) => m.AdminModule),
     canActivate: [RoutesGuardGuard],
   },
   {

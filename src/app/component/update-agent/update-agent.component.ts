@@ -16,13 +16,16 @@ const app = initializeApp(environment.firebaseConfig);
 export class UpdateAgentComponent implements OnInit {
   id = '';
   submitted = false;
-  compagny: [Person[]] = [[]];
-  agent: Person[] = [];
-
-  typePerson = [
-    { id: 1, type: 'agent' },
-    { id: 2, type: 'contact' },
-    { id: 3, type: 'target' },
+  agent: Person[] = [
+    {
+      type: '',
+      lname: '',
+      fname: '',
+      callsign: '',
+      birthday: '',
+      nationalityId: 0,
+      specialities: [0],
+    },
   ];
 
   updatePersonForm = new FormGroup({
@@ -44,70 +47,52 @@ export class UpdateAgentComponent implements OnInit {
   ngOnInit() {
     this.crud.getAgent().subscribe((data) => {
       this.getAgents(data);
-      this.getId();
-      for (var i = 0; i < this.compagny.length; i++) {
-        if (this.compagny[i]['id'] === this.id) {
-          this.agent = this.compagny[i];
-          console.log(this.agent);
-        }
-      }
+      console.log(data);
     });
   }
 
-  // Recuperation de tous les agenst en vude comparer les id
+  // Recuperation de tout les agents en vu de comparer les id
   getAgents(data: any) {
     const dataDisplay: any = [];
-    Object.keys(data).map(function (e: string) {
-      const agents = {
-        id: e,
-        lname: data[e]['lname'],
-        fname: data[e]['fname'],
-        callsign: data[e]['callsign'],
-        birthday: data[e]['birthday'],
-        nationalityId: data[e]['nationalityId'],
-        specialities: [data[e]['specialities']],
-      };
-      dataDisplay.push(agents);
-    });
-    this.compagny = dataDisplay;
-  }
-
-  // Get ID passé en URL
-  getId() {
-    return this.activatedRoute.params.subscribe((params) => {
+    // On recupère l'ID passé en URL
+    this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
     });
+    for (var i = 0; i < Object.keys(data).length; i++) {
+      if (Object.keys(data)[i] === this.id) {
+        const dataAgent = Object.values(data)[i];
+        dataDisplay.push(dataAgent);
+      }
+      this.agent = dataDisplay;
+    }
   }
 
   // Update agent en fct des valeurs envoyées
-  updatePerson(id: string) {
-    const type =
-      this.updatePersonForm.get('type')?.value === ''
-        ? this.agent['type']
-        : this.updatePersonForm.get('type')?.value;
+  updatePerson() {
+    const type = this.agent[0].type;
     const lname =
       this.updatePersonForm.get('lname')?.value === ''
-        ? this.agent['lname']
+        ? this.agent[0].lname
         : this.updatePersonForm.get('lname')?.value;
     const fname =
       this.updatePersonForm.get('fname')?.value === ''
-        ? this.agent['fname']
+        ? this.agent[0].fname
         : this.updatePersonForm.get('fname')?.value;
     const callsign =
       this.updatePersonForm.get('callsign')?.value === ''
-        ? this.agent['callsign']
+        ? this.agent[0].callsign
         : this.updatePersonForm.get('callsign')?.value;
     const birthday =
       this.updatePersonForm.get('birthday')?.value === ''
-        ? this.agent['birthday']
+        ? this.agent[0].birthday
         : this.updatePersonForm.get('birthday')?.value;
     const nationalityId =
       this.updatePersonForm.get('nationalityId')?.value === ''
-        ? this.agent['nationalityId']
+        ? this.agent[0].nationalityId
         : this.updatePersonForm.get('nationalityId')?.value;
     const specialities =
       this.updatePersonForm.get('specialities')?.value === ''
-        ? this.agent['specialities']
+        ? this.agent[0].specialities
         : this.updatePersonForm.get('specialities')?.value;
 
     this.crud

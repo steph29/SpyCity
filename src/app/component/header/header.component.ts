@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase/app';
 import { getAuth, onAuthStateChanged } from '@firebase/auth';
 import { AuthService } from 'src/app/services/auth.service';
 
