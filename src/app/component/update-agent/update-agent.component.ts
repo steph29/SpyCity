@@ -5,7 +5,6 @@ import { CrudService } from 'src/app/shared/crud.service';
 import { Person } from '../../models/person';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
-import { BehaviorSubject } from 'rxjs';
 
 const app = initializeApp(environment.firebaseConfig);
 
@@ -15,9 +14,6 @@ const app = initializeApp(environment.firebaseConfig);
   styleUrls: ['./update-agent.component.css'],
 })
 export class UpdateAgentComponent implements OnInit {
-  _agent = new BehaviorSubject<Person[]>([]);
-  agent$ = this._agent.asObservable();
-
   id = '';
   submitted = false;
   agent: Person[] = [];
@@ -39,23 +35,32 @@ export class UpdateAgentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // on recupere les agents
     this.crud.getAgent();
+    // on recupere l'id passé en URL
+    this.getAgents();
+    // on souscrit ...
+    this.crud.getUpdateAgent().subscribe((agent: Person[]) => {
+      this.agent = agent;
+      console.log(this.agent);
+
+      const dataDisplay: any = [];
+      for (var i = 0; i < Object.keys(this.agent).length; i++) {
+        if (Object.keys(this.agent)[i] === this.id) {
+          const dataAgent = Object.values(this.agent)[i];
+          dataDisplay.push(dataAgent);
+        }
+        this.agent = dataDisplay;
+      }
+    });
   }
 
   // Recuperation de tout les agents en vu de comparer les id
-  getAgents(data: any) {
-    const dataDisplay: any = [];
+  getAgents() {
     // On recupère l'ID passé en URL
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
     });
-    for (var i = 0; i < Object.keys(data).length; i++) {
-      if (Object.keys(data)[i] === this.id) {
-        const dataAgent = Object.values(data)[i];
-        dataDisplay.push(dataAgent);
-      }
-      this.agent = dataDisplay;
-    }
   }
 
   // Update agent en fct des valeurs envoyées
@@ -96,7 +101,6 @@ export class UpdateAgentComponent implements OnInit {
       nationalityId,
       specialities
     );
-    this._agent.next([]);
     this.router.navigate(['/admin']);
   }
 

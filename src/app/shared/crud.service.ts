@@ -43,8 +43,6 @@ export class CrudService {
       }>(this.apiurl + '/agent.json')
       .pipe(
         map((agentData: any) => {
-          console.log(Object.keys(agentData).map);
-
           return Object.keys(agentData).map((agent: any) => {
             return {
               id: agent,
@@ -100,6 +98,7 @@ export class CrudService {
   getUpdateAgent() {
     return this.personsSubject.asObservable();
   }
+
   updateAgent(
     id: string,
     type: string,
@@ -182,9 +181,39 @@ export class CrudService {
   }
   // Read
   getMission() {
-    return this.httpClient.get(this.apiurl + '/missions.json');
+    return this.httpClient
+      .get<{ id: string; missionsList: any }>(this.apiurl + '/missions.json')
+      .pipe(
+        map((missionData: any) => {
+          return Object.keys(missionData).map(function (missionOne: any) {
+            return {
+              id: missionOne,
+              agent: missionData[missionOne].agent,
+              codeName: missionData[missionOne].codeName,
+              contact: missionData[missionOne].contact,
+              country: missionData[missionOne].number,
+              desc: missionData[missionOne].desc,
+              endDate: missionData[missionOne].endDate,
+              hideouts: missionData[missionOne].hideouts,
+              mission: missionData[missionOne].mission,
+              specialities: missionData[missionOne].specialities,
+              startDate: missionData[missionOne].startDate,
+              status: missionData[missionOne].status,
+              target: missionData[missionOne].target,
+              type: missionData[missionOne].type,
+            };
+          });
+        })
+      )
+      .subscribe((transformMission) => {
+        this.missions = transformMission;
+        this.missionsSubject.next([...this.missions]);
+      });
   }
 
+  getUpdateMission() {
+    return this.missionsSubject.asObservable();
+  }
   // Update
   updateMission(
     id: string,
@@ -227,7 +256,13 @@ export class CrudService {
   deleteMission(id: string | null) {
     this.httpClient
       .delete<Mission>(this.apiurl + '/missions/' + id + '.json/')
-      .subscribe(() => {});
+      .subscribe(() => {
+        const updateMission = this.missions.filter(
+          (mission) => mission.id !== id
+        );
+        this.missions = updateMission;
+        this.missionsSubject.next([...this.missions]);
+      });
   }
 
   // **************** Get Data *******************

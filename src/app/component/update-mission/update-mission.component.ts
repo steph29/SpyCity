@@ -51,9 +51,10 @@ export class UpdateMissionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.crud.getMission().subscribe((data) => {
-      this.getMission(data);
-    });
+    this.crud.getMission();
+    // .subscribe((data) => {
+    //   this.getMission(data);
+    // });
 
     this.getData('target', 'callsign', this.targetList);
     this.getData('countries', 'name', this.countriesList);
