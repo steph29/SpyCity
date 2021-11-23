@@ -21,8 +21,9 @@
               <a
                 [routerLink]="['/delete', item.id]"
                 class="btn btn-outline-danger btn-sm"
-                ><img src="/assets/bin.png" alt="delete"
-              /></a>
+              >
+                <img src="/assets/bin.png" alt="delete" />
+              </a>
             </td>
           </tr>
         </tbody>
@@ -38,9 +39,9 @@
           <th class="col-auto">edit</th>
           <th class="col-auto">Delete</th>
         </thead>
-        <tbody>
+        <tbody *ngIf="agents.length > 0">
           <tr *ngFor="let item of agents">
-            <td id="{{ item.id }}">{{ item.agent }}</td>
+            <td id="{{ item.id }}">{{ item.callsign }}</td>
             <td>
               <a
                 [routerLink]="['/updateAgent', item.id]"
@@ -53,8 +54,6 @@
             <td>
               <a
                 [routerLink]="['/delete', item.id]"
-                type="submit"
-                name="delete_contact"
                 class="btn btn-outline-danger btn-sm my-0"
               >
                 <img src="/assets/bin.png" alt="delete" />
@@ -62,6 +61,7 @@
             </td>
           </tr>
         </tbody>
+        <h5 *ngIf="agents.length <= 0">No agent added yet</h5>
       </table>
     </section>
   </div>

@@ -7,10 +7,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CrudService } from 'src/app/shared/crud.service';
-import { AuthService } from 'src/app/services/auth.service';
 import { Person } from '../../models/person';
 import { Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 
@@ -23,8 +21,8 @@ const app = initializeApp(environment.firebaseConfig);
 })
 export class AddAgentComponent implements OnInit {
   submitted = false;
-  private persons: Person[] = [];
-  private personsUpdated = new Subject<Person[]>();
+  persons: Person[] = [];
+  personsUpdated = new Subject<Person[]>();
 
   typePerson = [
     { id: 1, type: 'agent' },
@@ -46,9 +44,7 @@ export class AddAgentComponent implements OnInit {
     private formBuilder: FormBuilder,
     private crud: CrudService,
     private router: Router
-  ) {}
-
-  ngOnInit() {
+  ) {
     const addPersonForm = this.formBuilder.group({
       type: ['', [Validators.required]],
       lname: ['', [Validators.required]],
@@ -59,6 +55,8 @@ export class AddAgentComponent implements OnInit {
       specialities: ['', [Validators.required]],
     });
   }
+
+  ngOnInit() {}
 
   addNewPerson() {
     const type = this.addPersonForm.get('type')?.value;

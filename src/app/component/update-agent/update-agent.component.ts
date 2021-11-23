@@ -5,6 +5,7 @@ import { CrudService } from 'src/app/shared/crud.service';
 import { Person } from '../../models/person';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
+import { BehaviorSubject } from 'rxjs';
 
 const app = initializeApp(environment.firebaseConfig);
 
@@ -14,19 +15,12 @@ const app = initializeApp(environment.firebaseConfig);
   styleUrls: ['./update-agent.component.css'],
 })
 export class UpdateAgentComponent implements OnInit {
+  _agent = new BehaviorSubject<Person[]>([]);
+  agent$ = this._agent.asObservable();
+
   id = '';
   submitted = false;
-  agent: Person[] = [
-    {
-      type: '',
-      lname: '',
-      fname: '',
-      callsign: '',
-      birthday: '',
-      nationalityId: 0,
-      specialities: [0],
-    },
-  ];
+  agent: Person[] = [];
 
   updatePersonForm = new FormGroup({
     type: new FormControl(''),
@@ -45,9 +39,7 @@ export class UpdateAgentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.crud.getAgent().subscribe((data) => {
-      this.getAgents(data);
-    });
+    this.crud.getAgent();
   }
 
   // Recuperation de tout les agents en vu de comparer les id
@@ -94,20 +86,17 @@ export class UpdateAgentComponent implements OnInit {
         ? this.agent[0].specialities
         : this.updatePersonForm.get('specialities')?.value;
 
-    this.crud
-      .updateAgent(
-        this.id,
-        type,
-        lname,
-        fname,
-        callsign,
-        birthday,
-        nationalityId,
-        specialities
-      )
-      .subscribe((data) => {
-        console.log(data);
-      });
+    this.crud.updateAgent(
+      this.id,
+      type,
+      lname,
+      fname,
+      callsign,
+      birthday,
+      nationalityId,
+      specialities
+    );
+    this._agent.next([]);
     this.router.navigate(['/admin']);
   }
 

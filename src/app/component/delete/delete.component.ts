@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Person } from 'src/app/models/person';
 import { CrudService } from 'src/app/shared/crud.service';
+import { AdminComponent } from '../admin/admin.component';
 
 @Component({
   selector: 'app-delete',
@@ -9,6 +11,7 @@ import { CrudService } from 'src/app/shared/crud.service';
 })
 export class DeleteComponent implements OnInit {
   id = '';
+
   constructor(
     private router: Router,
     private crud: CrudService,
@@ -17,12 +20,8 @@ export class DeleteComponent implements OnInit {
 
   ngOnInit(): void {
     this.getId();
-    this.crud.deleteAgent(this.id).subscribe((data) => {
-      console.log(data);
-    });
-    this.crud.deleteMission(this.id).subscribe((data) => {
-      console.log(data);
-    });
+    this.crud.deleteAgent(this.id);
+    this.crud.deleteMission(this.id);
     this.router.navigate(['/admin']);
   }
 
