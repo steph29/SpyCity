@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { Person } from '../models/person';
 import { Mission } from '../models/mission';
-import { Resolve } from '@angular/router';
+import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 const app = initializeApp(environment.firebaseConfig);
 
@@ -13,12 +13,12 @@ const app = initializeApp(environment.firebaseConfig);
   providedIn: 'root',
 })
 export class CrudService {
-  private persons: Person[] = [];
-  private personsUpdated = new Subject<Person[]>();
-  private missions: Mission[] = [];
-  private missionsUpdated = new Subject<Mission[]>();
+  personsSubject = new Subject<Person[]>();
+  missionsSubject = new Subject<Mission[]>();
 
-  mongoUrl = 'https:localhost:3000';
+  private persons: Person[] = [];
+  private missions: Mission[] = [];
+
   apiurl =
     'https://spyfield-b2064-default-rtdb.europe-west1.firebasedatabase.app';
   httpOptions = {
@@ -33,6 +33,38 @@ export class CrudService {
   constructor(private httpClient: HttpClient) {}
 
   // **************** AGENT *******************
+
+  // READ
+  getAgent() {
+    this.httpClient
+      .get<{
+        id: string;
+        agents: any;
+      }>(this.apiurl + '/agent.json')
+      .pipe(
+        map((agentData: any) => {
+          console.log(Object.keys(agentData).map);
+
+          return Object.keys(agentData).map((agent: any) => {
+            return {
+              id: agent,
+              type: agentData[agent].type,
+              lname: agentData[agent].lname,
+              fname: agentData[agent].fname,
+              callsign: agentData[agent].callsign,
+              birthday: agentData[agent].birthday,
+              nationalityId: agentData[agent].nationalityId,
+              specialities: agentData[agent].specialities,
+            };
+          });
+        })
+      )
+      .subscribe((transformAgent) => {
+        this.persons = transformAgent;
+        this.personsSubject.next([...this.persons]);
+      });
+  }
+
   // CREATE
   addAgent(
     type: string,
@@ -44,6 +76,7 @@ export class CrudService {
     specialities: [number]
   ) {
     const person: Person = {
+      id: null,
       type: type,
       lname: lname,
       fname: fname,
@@ -53,20 +86,20 @@ export class CrudService {
       specialities: specialities,
     };
 
-    return this.httpClient
-      .post<{ message: string }>(this.apiurl + '/' + type + '.json', person)
-      .subscribe(() => {
+    this.httpClient
+      .post<{ id: string }>(this.apiurl + '/' + type + '.json', person)
+      .subscribe((data) => {
+        const id = data.id;
+        person.id = id;
         this.persons.push(person);
-        this.personsUpdated.next([...this.persons]);
+        this.personsSubject.next([...this.persons]);
       });
   }
 
-  // READ
-  getAgent() {
-    return this.httpClient.get<Person>(this.apiurl + '/agent.json');
-  }
-
   // UPDATE
+  getUpdateAgent() {
+    return this.personsSubject.asObservable();
+  }
   updateAgent(
     id: string,
     type: string,
@@ -78,6 +111,7 @@ export class CrudService {
     specialities: [number]
   ) {
     const person: Person = {
+      id: null,
       type: type,
       lname: lname,
       fname: fname,
@@ -86,17 +120,21 @@ export class CrudService {
       nationalityId: nationalityId,
       specialities: specialities,
     };
-    return this.httpClient.patch<Person>(
+    this.httpClient.patch<Person>(
       this.apiurl + '/agent/' + id + '.json',
       person
     );
   }
   // DELETE
 
-  deleteAgent(id: string) {
-    return this.httpClient.delete<Person>(
-      this.apiurl + '/agent/' + id + '.json/'
-    );
+  deleteAgent(id: string | null) {
+    this.httpClient
+      .delete<Person>(this.apiurl + '/agent/' + id + '.json/')
+      .subscribe(() => {
+        const updateAgent = this.persons.filter((agent) => agent.id !== id);
+        this.persons = updateAgent;
+        this.personsSubject.next([...this.persons]);
+      });
   }
 
   // **************** Missions *******************
@@ -117,6 +155,7 @@ export class CrudService {
     type: string
   ) {
     const missionOne: Mission = {
+      id: null,
       agent: agent,
       codeName: codeName,
       contact: contact,
@@ -133,10 +172,12 @@ export class CrudService {
     };
 
     return this.httpClient
-      .post<Mission>(this.apiurl + '/missions.json', missionOne)
-      .subscribe(() => {
+      .post<{ id: string }>(this.apiurl + '/missions.json', missionOne)
+      .subscribe((data) => {
+        const id = data.id;
+        missionOne.id = id;
         this.missions.push(missionOne);
-        this.missionsUpdated.next([...this.missions]);
+        this.missionsSubject.next([...this.missions]);
       });
   }
   // Read
@@ -162,6 +203,7 @@ export class CrudService {
     type: string
   ) {
     const missionOne: Mission = {
+      id: null,
       agent: agent,
       codeName: codeName,
       contact: contact,
@@ -182,10 +224,10 @@ export class CrudService {
     );
   }
   // Delete
-  deleteMission(id: string) {
-    return this.httpClient.delete<Mission>(
-      this.apiurl + '/missions/' + id + '.json/'
-    );
+  deleteMission(id: string | null) {
+    this.httpClient
+      .delete<Mission>(this.apiurl + '/missions/' + id + '.json/')
+      .subscribe(() => {});
   }
 
   // **************** Get Data *******************

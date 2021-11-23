@@ -3,7 +3,10 @@ import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { CrudService } from 'src/app/shared/crud.service';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { Person } from 'src/app/models/person';
+import { Mission } from 'src/app/models/mission';
 
 const app = initializeApp(environment.firebaseConfig);
 
@@ -19,8 +22,10 @@ export interface List {
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
-  missions = [{ id: 1, mission: 'test' }];
-  agents = [{ id: 1, agent: 'testAgent' }];
+  missions: Mission[] = [];
+  agents: Person[] = [];
+
+  private agentSub = Subscription;
 
   countriesList: List[] = [];
   targetList: List[] = [];
@@ -50,8 +55,11 @@ export class AdminComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.crud.getAgent().subscribe((data) => {
-      this.initAgent(data);
+    this.crud.getAgent();
+    this.crud.getUpdateAgent().subscribe((agent: Person[]) => {
+      console.log(agent);
+
+      this.agents = agent;
     });
     this.crud.getMission().subscribe((data) => {
       this.initMission(data);
@@ -128,5 +136,9 @@ export class AdminComponent implements OnInit {
         list.push(subArray);
       });
     });
+  }
+
+  delete(id: string | null) {
+    this.crud.deleteAgent(id);
   }
 }

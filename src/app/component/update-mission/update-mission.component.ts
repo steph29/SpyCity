@@ -17,53 +17,7 @@ export interface List {
 export class UpdateMissionComponent implements OnInit {
   id = '';
   setOfMission: [Mission[]] = [[]];
-  mission: Mission[] = [
-    {
-      agent: [
-        {
-          type: '',
-          lname: '',
-          fname: '',
-          callsign: '',
-          birthday: '',
-          nationalityId: 0,
-          specialities: [0],
-        },
-      ],
-      codeName: '',
-      contact: [
-        {
-          type: '',
-          lname: '',
-          fname: '',
-          callsign: '',
-          birthday: '',
-          nationalityId: 0,
-          specialities: [0],
-        },
-      ],
-      country: 0,
-      desc: '',
-      endDate: new Date(),
-      hideouts: [''],
-      mission: '',
-      specialities: 90,
-      startDate: new Date(),
-      status: 0,
-      target: [
-        {
-          type: '',
-          lname: '',
-          fname: '',
-          callsign: '',
-          birthday: '',
-          nationalityId: 0,
-          specialities: [0],
-        },
-      ],
-      type: '',
-    },
-  ];
+  mission: Mission[] = [];
 
   countriesList: List[] = [];
   targetList: List[] = [];
