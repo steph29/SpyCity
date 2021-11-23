@@ -57,12 +57,11 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.crud.getAgent();
     this.crud.getUpdateAgent().subscribe((agent: Person[]) => {
-      console.log(agent);
-
       this.agents = agent;
     });
-    this.crud.getMission().subscribe((data) => {
-      this.initMission(data);
+    this.crud.getMission();
+    this.crud.getUpdateMission().subscribe((mission: Mission[]) => {
+      this.missions = mission;
     });
     this.getData('target', 'callsign', this.targetList);
     this.getData('countries', 'name', this.countriesList);

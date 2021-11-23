@@ -9,7 +9,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of missions">
-            <td id="{{ item.id }}">{{ item.mission }}</td>
+            <td id="{{ item.id }}">{{ item.codeName }}</td>
             <td>
               <a
                 [routerLink]="['/updateMission', item.id]"
