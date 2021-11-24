@@ -138,26 +138,23 @@ export class UpdateMissionComponent implements OnInit {
         ? this.mission[0].type
         : this.updateMissionForm.get('type')?.value;
 
-    this.crud
-      .updateMission(
-        this.id,
-        agent,
-        codeName,
-        contact,
-        country,
-        desc,
-        endDate,
-        hideouts,
-        mission,
-        specialities,
-        startDate,
-        status,
-        target,
-        type
-      )
-      .subscribe((data) => {
-        console.log(data);
-      });
+    this.crud.updateMission(
+      this.id,
+      agent,
+      codeName,
+      contact,
+      country,
+      desc,
+      endDate,
+      hideouts,
+      mission,
+      specialities,
+      startDate,
+      status,
+      target,
+      type
+    );
+
     this.router.navigate(['/admin']);
   }
 
