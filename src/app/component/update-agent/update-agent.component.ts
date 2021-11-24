@@ -35,32 +35,43 @@ export class UpdateAgentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // on recupere les agents
     this.crud.getAgent();
-    // on recupere l'id passé en URL
-    this.getAgents();
-    // on souscrit ...
     this.crud.getUpdateAgent().subscribe((agent: Person[]) => {
-      this.agent = agent;
-      console.log(this.agent);
-
-      const dataDisplay: any = [];
-      for (var i = 0; i < Object.keys(this.agent).length; i++) {
-        if (Object.keys(this.agent)[i] === this.id) {
-          const dataAgent = Object.values(this.agent)[i];
-          dataDisplay.push(dataAgent);
+      this.getAgents(agent);
+      const array: Person[] = [];
+      for (var i = 0; i < Object.values(agent).length; i++) {
+        if (this.id === Object.values(agent)[i].id) {
+          const agentOne = Object.values(agent)[i];
+          array.push(agentOne);
         }
-        this.agent = dataDisplay;
+        this.agent = array;
       }
+      const otherArray: any = [];
+      this.agent.map(function (e) {
+        const identity = {
+          id: e.id,
+          callsign: e.callsign,
+        };
+        otherArray.push(identity);
+      });
+      this.agent = otherArray;
     });
   }
 
   // Recuperation de tout les agents en vu de comparer les id
-  getAgents() {
+  getAgents(data: any) {
     // On recupère l'ID passé en URL
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
     });
+    const dataDisplay: any = [];
+    for (var i = 0; i < Object.keys(data).length; i++) {
+      if (Object.keys(data)[i] === this.id) {
+        const dataAgent = Object.values(data)[i];
+        dataDisplay.push(dataAgent);
+      }
+      this.agent = dataDisplay;
+    }
   }
 
   // Update agent en fct des valeurs envoyées

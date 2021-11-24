@@ -119,10 +119,11 @@ export class CrudService {
       nationalityId: nationalityId,
       specialities: specialities,
     };
-    this.httpClient.patch<Person>(
-      this.apiurl + '/agent/' + id + '.json',
-      person
-    );
+    this.httpClient
+      .patch<Person>(this.apiurl + '/agent/' + id + '.json', person)
+      .subscribe(() => {
+        return this.personsSubject;
+      });
   }
   // DELETE
 
@@ -247,10 +248,9 @@ export class CrudService {
       target: target,
       type: type,
     };
-    return this.httpClient.patch<Mission>(
-      this.apiurl + '/missions/' + id + '.json',
-      missionOne
-    );
+    return this.httpClient
+      .patch<Mission>(this.apiurl + '/missions/' + id + '.json', missionOne)
+      .subscribe(() => {});
   }
   // Delete
   deleteMission(id: string | null) {
