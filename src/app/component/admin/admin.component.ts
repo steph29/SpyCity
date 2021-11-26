@@ -24,6 +24,7 @@ export interface List {
 export class AdminComponent implements OnInit {
   missions: Mission[] = [];
   agents: Person[] = [];
+  visited = new Date();
 
   private agentSub = Subscription;
 
@@ -71,6 +72,11 @@ export class AdminComponent implements OnInit {
     this.getData('agent', 'callsign', this.agentList);
     this.getData('countries', 'capital', this.hideoutsList);
     this.getData('types', 'name', this.typeList);
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
   }
 
   initAgent(data: any) {
