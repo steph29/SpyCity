@@ -122,7 +122,9 @@ export class CrudService {
     this.httpClient
       .patch<Person>(this.apiurl + '/agent/' + id + '.json', person)
       .subscribe(() => {
-        return this.personsSubject;
+        this.getUpdateAgent();
+        console.log(this.persons);
+        return this.personsSubject.next([...this.persons]);
       });
   }
   // DELETE
