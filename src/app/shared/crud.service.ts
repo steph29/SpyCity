@@ -252,12 +252,8 @@ export class CrudService {
     };
     return this.httpClient
       .patch<Mission>(this.apiurl + '/missions/' + id + '.json', missionOne)
-      .subscribe(() => {
-        this.getUpdateMission();
-        return this.missionsSubject.next([...this.missions]);
-      });
+      .subscribe(() => {});
   }
-
   // Delete
   deleteMission(id: string | null) {
     this.httpClient
