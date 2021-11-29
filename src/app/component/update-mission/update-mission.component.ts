@@ -72,6 +72,8 @@ export class UpdateMissionComponent implements OnInit {
       });
       this.mission = otherArray;
       console.log(this.mission[0].codeName);
+
+
     });
 
     this.getData('target', 'callsign', this.targetList);
