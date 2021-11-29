@@ -53,7 +53,27 @@ export class UpdateMissionComponent implements OnInit {
   ngOnInit(): void {
     this.crud.getMission();
     this.crud.getUpdateMission().subscribe((mission: Mission[]) => {
-      this.mission = mission;
+      this.getMission(mission);
+      const array: Mission[] = [];
+      for (var i = 0; i < Object.values(mission).length; i++) {
+        if (this.id === Object.values(mission)[i].id) {
+          const missionOne = Object.values(mission)[i];
+          array.push(missionOne);
+        }
+        this.mission = array;
+      }
+      const otherArray: any = [];
+      this.mission.map(function (e) {
+        const identity = {
+          id: e.id,
+          codeName: e.codeName,
+        };
+        otherArray.push(identity);
+      });
+      this.mission = otherArray;
+      console.log(this.mission[0].codeName);
+
+
     });
 
     this.getData('target', 'callsign', this.targetList);
@@ -67,7 +87,6 @@ export class UpdateMissionComponent implements OnInit {
   }
 
   getMission(data: any) {
-    const dataDisplay: any = [];
     // On recupère l'ID passé en URL
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
