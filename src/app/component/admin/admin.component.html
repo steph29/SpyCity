@@ -67,6 +67,7 @@
   </div>
 </div>
 
+<h4>Dernière visite : {{ visited | date: "dd/MM/yyyy" }}</h4>
 <!-- First section -> create a mission -->
 <div class="container mt-3">
   <form [formGroup]="addMissionForm" (ngSubmit)="addNewMission()">

@@ -71,6 +71,7 @@ export class UpdateMissionComponent implements OnInit {
         otherArray.push(identity);
       });
       this.mission = otherArray;
+
     });
 
     this.getData('target', 'callsign', this.targetList);
