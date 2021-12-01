@@ -13,7 +13,7 @@ const app = initializeApp(environment.firebaseConfig);
 // Declaration d'un interface List
 export interface List {
   id: string;
-  item: string;
+  item: any;
 }
 
 @Component({
@@ -36,6 +36,7 @@ export class AdminComponent implements OnInit {
   statusList: List[] = [];
   hideoutsList: List[] = [];
   typeList: List[] = [];
+  arrayList: List[] = [];
 
   constructor(public crud: CrudService, private router: Router) {}
 
@@ -60,18 +61,23 @@ export class AdminComponent implements OnInit {
     this.crud.getUpdateAgent().subscribe((agent: Person[]) => {
       this.agents = agent;
     });
+    setTimeout(() => {
+      this.crud.getAgent();
+    }, 1000);
     this.crud.getMission();
     this.crud.getUpdateMission().subscribe((mission: Mission[]) => {
       this.missions = mission;
     });
-    this.getData('target', 'callsign', this.targetList);
-    this.getData('countries', 'name', this.countriesList);
-    this.getData('contact', 'callsign', this.contactList);
-    this.getData('specialities', 'name', this.specialitiesList);
-    this.getData('status', 'state', this.statusList);
-    this.getData('agent', 'callsign', this.agentList);
-    this.getData('countries', 'capital', this.hideoutsList);
-    this.getData('types', 'name', this.typeList);
+    setTimeout(() => {
+      this.crud.getMission();
+    }, 1000);
+    this.getData('target', this.targetList);
+    this.getData('countries', this.countriesList);
+    this.getData('contact', this.contactList);
+    this.getData('specialities', this.specialitiesList);
+    this.getData('status', this.statusList);
+    this.getData('agent', this.agentList);
+    this.getData('types', this.typeList);
   }
 
   ngOnDestroy(): void {
@@ -131,16 +137,41 @@ export class AdminComponent implements OnInit {
     this.router.navigate(['/admin']);
   }
 
-  getData(document: string, params: string, list: List[]) {
+  getData(document: string, list: List[]) {
     return this.crud.getDocument(document).subscribe((data: any) => {
       Object.keys(data).map(function (e) {
         const subArray = {
           id: e,
-          item: data[e][params],
+          item: data[e],
         };
         list.push(subArray);
       });
     });
+  }
+
+  onChange(newObj: any) {
+    this.hideoutsList = [];
+    this.arrayList = [];
+    for (var i = 0; i < this.countriesList.length; i++) {
+      if (newObj === this.countriesList[i].item.name) {
+        this.hideoutsList.push(this.countriesList[i].item.capital);
+        for (var j = 0; j < this.contactList.length; j++) {
+          if (
+            this.countriesList[i].id === this.contactList[j].item.nationalityId
+          ) {
+            console.log(this.contactList[j].item.callsign);
+            this.arrayList.push(this.contactList[j].item.callsign);
+          }
+        }
+      }
+    }
+  }
+
+  onSelectTarget(newObj: any) {
+    for (var i = 0; i < this.targetList.length; i++) {
+      if (newObj === this.targetList[i].item.nationlityId) {
+      }
+    }
   }
 
   delete(id: string | null) {

@@ -88,13 +88,14 @@
           <div class="form-group my-3">
             <label class="col-form-label">Country</label>
             <select
+              (ngModelChange)="onChange($event)"
               formControlName="country"
               class="form-control text-center linked-select"
             >
               <option>Select the country</option>
 
               <option *ngFor="let item of countriesList">
-                {{ item.item }}
+                {{ item.item.name }}
               </option>
             </select>
           </div>
@@ -110,13 +111,14 @@
           <div class="form-group my-3">
             <label class="col-form-label">Target </label>
             <select
+              (ngModelChange)="onSelectTarget($event)"
               formControlName="target"
               class="form-control text-center linked-select"
             >
               <option>Select your Target</option>
 
               <option *ngFor="let item of targetList">
-                {{ item.item }}
+                {{ item.item.callsign }}
               </option>
             </select>
             <div class="newSelectTarget"></div>
@@ -144,7 +146,7 @@
               <option>Select your Specialities</option>
 
               <option *ngFor="let item of specialitiesList">
-                {{ item.item }}
+                {{ item.item.name }}
               </option>
             </select>
           </div>
@@ -166,7 +168,7 @@
             >
               <option>Select your Agent</option>
               <option *ngFor="let item of agentList">
-                {{ item.item }}
+                {{ item.item.callsign }}
               </option>
             </select>
 
@@ -219,8 +221,8 @@
             >
               <option>Select your contact</option>
 
-              <option *ngFor="let item of contactList">
-                {{ item.item }}
+              <option *ngFor="let item of arrayList">
+                {{ item }}
               </option>
             </select>
             <div class="newSelectContact"></div>
@@ -248,7 +250,9 @@
             >
               <option>Select your Type of mission</option>
 
-              <option *ngFor="let item of typeList">{{ item.item }}</option>
+              <option *ngFor="let item of typeList">
+                {{ item.item.name }}
+              </option>
             </select>
           </div>
           <div class="form-group my-3">
@@ -259,7 +263,9 @@
             >
               <option>Select the status</option>
 
-              <option *ngFor="let item of statusList">{{ item.item }}</option>
+              <option *ngFor="let item of statusList">
+                {{ item.item.state }}
+              </option>
             </select>
           </div>
           <div class="form-group my-3">
@@ -269,7 +275,9 @@
               class="form-control text-center linked-select"
             >
               <option>Select your hideouts</option>
-              <option *ngFor="let item of hideoutsList">{{ item.item }}</option>
+              <option *ngFor="let item of hideoutsList">
+                {{ item }}
+              </option>
             </select>
             <div class="newSelectHideouts"></div>
             <div>
