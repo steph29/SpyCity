@@ -4,7 +4,7 @@ export interface Person {
   lname: string;
   fname: string;
   callsign: string;
-  birthday: string;
+  birthday: Date;
   nationalityId: number;
   specialities: [number];
 }

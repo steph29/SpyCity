@@ -37,6 +37,7 @@ export class AdminComponent implements OnInit {
   hideoutsList: List[] = [];
   typeList: List[] = [];
   arrayList: List[] = [];
+  agentListArray: List[] = [];
 
   constructor(public crud: CrudService, private router: Router) {}
 
@@ -75,8 +76,9 @@ export class AdminComponent implements OnInit {
     this.getData('countries', this.countriesList);
     this.getData('contact', this.contactList);
     this.getData('specialities', this.specialitiesList);
-    this.getData('status', this.statusList);
     this.getData('agent', this.agentList);
+
+    this.getData('status', this.statusList);
     this.getData('types', this.typeList);
   }
 
@@ -159,7 +161,6 @@ export class AdminComponent implements OnInit {
           if (
             this.countriesList[i].id === this.contactList[j].item.nationalityId
           ) {
-            console.log(this.contactList[j].item.callsign);
             this.arrayList.push(this.contactList[j].item.callsign);
           }
         }
@@ -168,10 +169,20 @@ export class AdminComponent implements OnInit {
   }
 
   onSelectTarget(newObj: any) {
+    this.agentListArray = [];
     for (var i = 0; i < this.targetList.length; i++) {
-      if (newObj === this.targetList[i].item.nationlityId) {
+      if (newObj === this.targetList[i].item.callsign) {
+        for (var j = 0; j < this.agentList.length; j++) {
+          if (
+            this.agentList[j].item.nationalityId !==
+            this.targetList[i].item.nationalityId
+          ) {
+            this.agentListArray.push(this.agentList[j].item.callsign);
+          }
+        }
       }
     }
+    console.log(this.agentListArray);
   }
 
   delete(id: string | null) {
