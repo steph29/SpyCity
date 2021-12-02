@@ -25,6 +25,8 @@ export class AdminComponent implements OnInit {
   missions: Mission[] = [];
   agents: Person[] = [];
   visited = new Date();
+  alert: boolean = false;
+  alertContact: boolean = false;
 
   private agentSub = Subscription;
 
@@ -38,6 +40,7 @@ export class AdminComponent implements OnInit {
   typeList: List[] = [];
   arrayList: List[] = [];
   agentListArray: List[] = [];
+  agentSpeList: List[] = [];
 
   constructor(public crud: CrudService, private router: Router) {}
 
@@ -166,6 +169,9 @@ export class AdminComponent implements OnInit {
         }
       }
     }
+    if (this.arrayList.length === 0) {
+      this.alertContact = true;
+    }
   }
 
   onSelectTarget(newObj: any) {
@@ -177,15 +183,39 @@ export class AdminComponent implements OnInit {
             this.agentList[j].item.nationalityId !==
             this.targetList[i].item.nationalityId
           ) {
-            this.agentListArray.push(this.agentList[j].item.callsign);
+            this.agentListArray.push(this.agentList[j]);
           }
         }
       }
     }
-    console.log(this.agentListArray);
+    return this.agentListArray;
+  }
+
+  SpecialitiesHandle(newObj: any) {
+    const indexArray: any = [];
+    this.agentSpeList = [];
+    for (var i = 0; i < this.specialitiesList.length; i++) {
+      if (newObj === this.specialitiesList[i].item.name) {
+        indexArray.push(this.specialitiesList[i].id);
+      }
+    }
+    this.agentListArray.forEach((element) => {
+      if (element.item.specialities[0] === indexArray[0]) {
+        console.log(element.item.callsign);
+        this.agentSpeList.push(element.item.callsign);
+      }
+    });
+    if (this.agentSpeList.length === 0) {
+      this.alert = true;
+    }
+    console.log(this.agentSpeList);
   }
 
   delete(id: string | null) {
     this.crud.deleteAgent(id);
+  }
+
+  closeAlert() {
+    this.alert = false;
   }
 }

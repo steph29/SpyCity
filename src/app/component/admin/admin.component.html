@@ -139,6 +139,7 @@
           <div class="form-group my-3">
             <label class="col-form-label">Specialities </label>
             <select
+              (ngModelChange)="SpecialitiesHandle($event)"
               formControlName="specialities"
               class="form-control text-center linked-select"
             >
@@ -160,13 +161,41 @@
               "
               id="alertAgent"
             ></div>
+
+            <div
+              *ngIf="alert"
+              class="
+                alert alert-danger alert-dismissible
+                fade
+                show
+                has-text-centered
+                w-100
+              "
+              role="alert"
+              #alert
+            >
+              <div>
+                We haven't any agent with this speciality
+
+                <button
+                  (click)="closeAlert()"
+                  mat-dialog-close="true"
+                  class="btn-alert close"
+                  type="button"
+                  data-dismiss="alert"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
             <label class="col-form-label">Agent </label>
             <select
               formControlName="agent"
               class="form-control text-center linked-select"
             >
               <option>Select your Agent</option>
-              <option *ngFor="let item of agentListArray">
+              <option *ngFor="let item of agentSpeList">
                 {{ item }}
               </option>
             </select>
@@ -204,15 +233,32 @@
         <div class="col">
           <div class="col form-group my-3">
             <div
+              *ngIf="alertContact"
               class="
-                alertContact
-                col-md-12
-                justify-content-center
-                align-items-center
-                d-flex
+                alert alert-danger alert-dismissible
+                fade
+                show
+                has-text-centered
+                w-100
               "
-              id="alertContact"
-            ></div>
+              role="alert"
+              #alert
+            >
+              <div>
+                We haven't any contact in this country
+
+                <button
+                  (click)="closeAlert()"
+                  mat-dialog-close="true"
+                  class="btn-alert close"
+                  type="button"
+                  data-dismiss="alert"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
             <label class="col-form-label">Contact</label>
             <select
               formControlName="contact"
