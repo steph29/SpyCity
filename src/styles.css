@@ -37,10 +37,13 @@ h5 {
   color: #8e8c8c;
 }
 
-.mainContainer {
-  margin-bottom: 70px;
+.container {
+  margin-bottom: 90px;
 }
-
+.sectionMissionAgentEdit {
+  margin-left: 20px !important;
+  margin-right: 20px !important;
+}
 .copyright {
   font-size: 0.7rem;
   color: #2b6714;
@@ -162,18 +165,14 @@ img {
   height: 60px;
 }
 
+@media screen and (max-width: 1150px) {
+  .btn-admin {
+    width: 100px;
+  }
+  .sectionMissionAgentEdit {
+    margin-top: 8px;
+  }
+}
 /*# sourceMappingURL=login.component.css.map */
 
 /*# sourceMappingURL=style.css.map */
-
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
