@@ -4,7 +4,6 @@ import { environment } from 'src/environments/environment';
 import { CrudService } from 'src/app/shared/crud.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { Person } from 'src/app/models/person';
 import { Mission } from 'src/app/models/mission';
 
@@ -27,8 +26,6 @@ export class AdminComponent implements OnInit {
   visited = new Date();
   alert: boolean = false;
   alertContact: boolean = false;
-
-  private agentSub = Subscription;
 
   countriesList: List[] = [];
   targetList: List[] = [];
@@ -80,7 +77,6 @@ export class AdminComponent implements OnInit {
     this.getData('contact', this.contactList);
     this.getData('specialities', this.specialitiesList);
     this.getData('agent', this.agentList);
-
     this.getData('status', this.statusList);
     this.getData('types', this.typeList);
   }

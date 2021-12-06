@@ -1,28 +1,31 @@
 <div class="container">
   <div class="row">
     <div class="my-1">
-      <h3 class="text-center">Select your mission</h3>
-      <div class="my-3">
-        <select
-          class="
-            justify-content-center
-            d-flex
-            text-center
-            linked-select
-            form-control
-          "
-          id="missionType"
-        >
-          <option>Select Your mission</option>
+      <form [formGroup]="selectMission">
+        <h3 class="text-center">Select your mission</h3>
+        <div class="my-3">
+          <select
+            (ngModelChange)="onChange($event)"
+            class="
+              justify-content-center
+              d-flex
+              text-center
+              linked-select
+              form-control
+            "
+            formControlName="mission"
+          >
+            <option>Select Your mission</option>
 
-          <option value="" name=""></option>
-        </select>
-      </div>
+            <option *ngFor="let item of missions">{{ item.codeName }}</option>
+          </select>
+        </div>
+      </form>
     </div>
     <div class="col-md-6 my-3">
       <section class="missionSection">
         <!-- Visualisation de la carte -->
-        <div id="mapid"></div>
+        <div id="map"></div>
       </section>
     </div>
 
@@ -31,17 +34,8 @@
         <div class="card-body">
           <!-- Tableau récap de la mission -->
           <div class="res"></div>
-          <div class="map">
-            <!-- coord map -->
-          </div>
         </div>
       </section>
     </div>
   </div>
 </div>
-<script
-  src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-  crossorigin="anonymous"
-></script>
-<script src="/js/script.js"></script>

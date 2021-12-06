@@ -113,10 +113,10 @@ export class UpdateMissionComponent implements OnInit {
       this.updateMissionForm.get('contact')?.value === ''
         ? this.mission[0].contact
         : this.updateMissionForm.get('contact')?.value;
-    const country =
-      this.updateMissionForm.get('country')?.value === ''
-        ? this.mission[0].country
-        : this.updateMissionForm.get('country')?.value;
+    const countryId =
+      this.updateMissionForm.get('countryId')?.value === ''
+        ? this.mission[0].countryId
+        : this.updateMissionForm.get('countryId')?.value;
     const desc =
       this.updateMissionForm.get('desc')?.value === ''
         ? this.mission[0].desc
@@ -159,7 +159,7 @@ export class UpdateMissionComponent implements OnInit {
       agent,
       codeName,
       contact,
-      country,
+      countryId,
       desc,
       endDate,
       hideouts,
