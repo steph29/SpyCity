@@ -5,7 +5,7 @@ export interface Mission {
   agent: [Person];
   codeName: string;
   contact: [Person];
-  country: number;
+  countryId: number;
   desc: string;
   endDate: Date;
   hideouts: [string];
