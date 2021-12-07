@@ -154,13 +154,21 @@ export class AdminComponent implements OnInit {
     this.hideoutsList = [];
     this.arrayList = [];
     for (var i = 0; i < this.countriesList.length; i++) {
-      if (newObj === this.countriesList[i].item.name) {
-        this.hideoutsList.push(this.countriesList[i].item.capital);
+      if (newObj === this.countriesList[i].id) {
+        const hideoutsObj = {
+          id: this.countriesList[i].id,
+          item: this.countriesList[i].item.capital,
+        };
+        this.hideoutsList.push(hideoutsObj);
         for (var j = 0; j < this.contactList.length; j++) {
           if (
             this.countriesList[i].id === this.contactList[j].item.nationalityId
           ) {
-            this.arrayList.push(this.contactList[j].item.callsign);
+            const contactObj = {
+              id: this.contactList[j].id,
+              item: this.contactList[j].item.callsign,
+            };
+            this.arrayList.push(contactObj);
           }
         }
       }
@@ -171,9 +179,11 @@ export class AdminComponent implements OnInit {
   }
 
   onSelectTarget(newObj: any) {
+    console.log(newObj);
+
     this.agentListArray = [];
     for (var i = 0; i < this.targetList.length; i++) {
-      if (newObj === this.targetList[i].item.callsign) {
+      if (newObj === this.targetList[i].id) {
         for (var j = 0; j < this.agentList.length; j++) {
           if (
             this.agentList[j].item.nationalityId !==
@@ -191,20 +201,25 @@ export class AdminComponent implements OnInit {
     const indexArray: any = [];
     this.agentSpeList = [];
     for (var i = 0; i < this.specialitiesList.length; i++) {
-      if (newObj === this.specialitiesList[i].item.name) {
+      if (newObj === this.specialitiesList[i].id) {
         indexArray.push(this.specialitiesList[i].id);
       }
     }
+    console.log(indexArray);
+    console.log(this.agentListArray);
     this.agentListArray.forEach((element) => {
       if (element.item.specialities[0] === indexArray[0]) {
+        const agentObj = {
+          id: element.id,
+          item: element.item.callsign,
+        };
         console.log(element.item.callsign);
-        this.agentSpeList.push(element.item.callsign);
+        this.agentSpeList.push(agentObj);
       }
     });
     if (this.agentSpeList.length === 0) {
       this.alert = true;
     }
-    console.log(this.agentSpeList);
   }
 
   delete(id: string | null) {

@@ -94,7 +94,7 @@
             >
               <option>Select the country</option>
 
-              <option *ngFor="let item of countriesList">
+              <option *ngFor="let item of countriesList" value="{{ item.id }}">
                 {{ item.item.name }}
               </option>
             </select>
@@ -117,7 +117,7 @@
             >
               <option>Select your Target</option>
 
-              <option *ngFor="let item of targetList">
+              <option *ngFor="let item of targetList" value="{{ item.id }}">
                 {{ item.item.callsign }}
               </option>
             </select>
@@ -146,7 +146,10 @@
             >
               <option>Select your Specialities</option>
 
-              <option *ngFor="let item of specialitiesList">
+              <option
+                *ngFor="let item of specialitiesList"
+                value="{{ item.id }}"
+              >
                 {{ item.item.name }}
               </option>
             </select>
@@ -196,8 +199,8 @@
               class="form-control text-center linked-select"
             >
               <option>Select your Agent</option>
-              <option *ngFor="let item of agentSpeList">
-                {{ item }}
+              <option *ngFor="let item of agentSpeList" value="{{ item.id }}">
+                {{ item.item }}
               </option>
             </select>
 
@@ -267,8 +270,8 @@
             >
               <option>Select your contact</option>
 
-              <option *ngFor="let item of arrayList">
-                {{ item }}
+              <option *ngFor="let item of arrayList" value="{{ item.id }}">
+                {{ item.item }}
               </option>
             </select>
             <div class="newSelectContact"></div>
@@ -296,7 +299,7 @@
             >
               <option>Select your Type of mission</option>
 
-              <option *ngFor="let item of typeList">
+              <option *ngFor="let item of typeList" value="{{ item.id }}">
                 {{ item.item.name }}
               </option>
             </select>
@@ -309,7 +312,7 @@
             >
               <option>Select the status</option>
 
-              <option *ngFor="let item of statusList">
+              <option *ngFor="let item of statusList" value="{{ item.id }}">
                 {{ item.item.state }}
               </option>
             </select>
@@ -321,8 +324,8 @@
               class="form-control text-center linked-select"
             >
               <option>Select your hideouts</option>
-              <option *ngFor="let item of hideoutsList">
-                {{ item }}
+              <option *ngFor="let item of hideoutsList" value="{{ item.id }}">
+                {{ item.item }}
               </option>
             </select>
             <div class="newSelectHideouts"></div>

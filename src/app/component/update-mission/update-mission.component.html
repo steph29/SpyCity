@@ -24,7 +24,7 @@
             >
               <option>Select the country</option>
 
-              <option *ngFor="let item of countriesList">
+              <option *ngFor="let item of countriesList" [ngValue]="item.id">
                 {{ item.item }}
               </option>
             </select>
