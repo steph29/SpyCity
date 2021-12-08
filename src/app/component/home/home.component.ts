@@ -11,6 +11,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class HomeComponent implements AfterViewInit {
   missions: Mission[] = [];
+  missionDisplay: Mission[] = [];
   map!: L.Map;
   lat: number = 47.89;
   lon: number = -3.57;
@@ -70,13 +71,35 @@ export class HomeComponent implements AfterViewInit {
           if (this.missions[i].countryId === this.array[j].id) {
             this.lat = this.array[j].item.latlng[0];
             this.lon = this.array[j].item.latlng[1];
-            console.log(this.lat + ', ' + this.lon);
             this.map.off();
             this.map.remove();
             this.initMap();
+            this.convertIdToName('agent', this.missions[i], 'agent');
+            this.convertIdToName('target', this.missions[i], 'target');
+            this.convertIdToName('contact', this.missions[i], 'contact');
           }
         }
       }
     }
+  }
+
+  convertIdToName(document: string, array: any, item: string) {
+    const jeNeSaisPasCommentLeNommer: any = [];
+    this.crud.getDocument(document).subscribe((data: any) => {
+      Object.keys(data).map(function (e) {
+        const agentObj = {
+          id: e,
+          item: data[e],
+        };
+        jeNeSaisPasCommentLeNommer.push(agentObj);
+      });
+      console.log(array.item);
+      console.log(jeNeSaisPasCommentLeNommer[1].id);
+      for (var i = 0; i < jeNeSaisPasCommentLeNommer.length; i++) {
+        if (array.agent[0] === jeNeSaisPasCommentLeNommer[i].id) {
+          console.log(jeNeSaisPasCommentLeNommer[i].item.callsign);
+        }
+      }
+    });
   }
 }

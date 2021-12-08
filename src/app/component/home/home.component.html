@@ -33,6 +33,86 @@
       <section class="missionSection">
         <div class="card-body">
           <!-- Tableau récap de la mission -->
+          <table *ngFor="let mission of missions">
+            <tr>
+              <td>Mission Name</td>
+              <td>
+                {{ mission.mission }}
+              </td>
+            </tr>
+            <tr>
+              <td>Code Name</td>
+              <td>
+                {{ mission.codeName }}
+              </td>
+            </tr>
+            <tr>
+              <td>Agent</td>
+              <td>
+                {{ mission.agent }}
+              </td>
+            </tr>
+            <tr>
+              <td>Target</td>
+              <td>
+                {{ mission.target }}
+              </td>
+            </tr>
+            <tr>
+              <td>Contact</td>
+              <td>
+                {{ mission.contact }}
+              </td>
+            </tr>
+            <tr>
+              <td>Country</td>
+              <td>
+                {{ mission.countryId }}
+              </td>
+            </tr>
+            <tr>
+              <td>Hideouts</td>
+              <td>
+                {{ mission.hideouts }}
+              </td>
+            </tr>
+            <tr>
+              <td>description</td>
+              <td>
+                {{ mission.desc }}
+              </td>
+            </tr>
+            <tr>
+              <td>Specialities</td>
+              <td>
+                {{ mission.specialities }}
+              </td>
+            </tr>
+            <tr>
+              <td>Mission Type</td>
+              <td>
+                {{ mission.type }}
+              </td>
+            </tr>
+            <tr>
+              <td>Date of start</td>
+              <td>
+                {{ mission.startDate }}
+              </td>
+            </tr>
+            <tr>
+              <td>Mission Date of End</td>
+              <td>
+                {{ mission.endDate }}
+              </td>
+            </tr>
+            <tr>
+              <td>Status</td>
+              <td>
+                {{ mission.status }}
+              </td>
+            </tr>
+          </table>
           <div class="res"></div>
         </div>
       </section>
